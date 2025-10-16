@@ -37,11 +37,34 @@ export const seed = mutation({
         order: 1,
       },
       {
+        title: "ESP32 Dual-Relay Wi-Fi Smart Switch for Home Automation",
+        slug: "esp32-dual-relay-wifi-smart-switch",
+        summary: "A versatile and open-source smart switch designed for home automation applications. Centered around the ESP32 module, this board provides Wi-Fi control over two independent high-voltage AC appliances, prioritizing safety, reliability, and ease of use for DIY enthusiasts and developers.",
+        heroImage: "https://harmless-tapir-303.convex.cloud/api/storage/be36e437-1a05-4427-a718-75b893ec6172",
+        featured: true,
+        technologies: ["ESP32", "Wi-Fi", "Bluetooth", "Relay Control", "2-Layer PCB", "KiCad", "ESPHome", "Tasmota", "Home Assistant", "UART"],
+        concept: "This project is a versatile and open-source smart switch designed for home automation applications. Centered around the powerful ESP32 module, this board provides Wi-Fi control over two independent high-voltage AC appliances, such as lights, fans, or power outlets. The design prioritizes safety, reliability, and ease of use, making it an ideal platform for DIY enthusiasts and developers looking to create custom smart home solutions. By leveraging popular open-source firmware like ESPHome or Tasmota, this switch can be seamlessly integrated into existing smart home ecosystems like Home Assistant, offering robust local control without reliance on proprietary cloud services.\n\n**System Architecture & Control Flow**\n\nThe operational logic is straightforward yet robust. The ESP32 module connects to the local Wi-Fi network and awaits commands. When a command is received (e.g., via MQTT or a web request), the ESP32 toggles a specific GPIO pin. Because the GPIO pins cannot supply the current needed to activate a relay coil, the signal is fed to the base of a transistor. This transistor acts as a digital switch, allowing current to flow from the 5V rail through the relay's coil to ground, energizing the electromagnet. This action mechanically closes the relay's high-voltage contacts, completing the AC circuit and powering the connected appliance. Flyback diodes are placed in parallel with the relay coils to safely dissipate the voltage spike generated when the coil is de-energized, protecting the driver transistors.",
+        layoutStrategy: "The 2-layer PCB layout was designed with electrical isolation as the highest priority. Handling mains voltage requires a meticulous approach to safety:\n\n* **Physical Separation:** The board is clearly divided into a low-voltage DC section and a high-voltage AC section. All AC traces are kept on one side of the board, physically distant from the sensitive DC logic.\n\n* **Isolation Slotting (Creepage):** To prevent current from 'creeping' across the PCB surface between the high and low voltage sides, physical cutouts or slots in the PCB are often used under the relays. This significantly increases the isolation distance and is a critical safety feature.\n\n* **Ground Plane:** The low-voltage section utilizes a large ground plane on the bottom copper layer. This ensures a stable 0V reference for the ESP32 and minimizes noise, leading to reliable operation. The high-voltage section does not have a ground plane to prevent fault currents from flowing where they shouldn't.",
+        challenges: "The primary challenge was ensuring electrical safety when handling mains voltage on a PCB. The design required careful attention to creepage distances, isolation slots, and physical separation between high-voltage AC traces and low-voltage DC logic. Component placement was critical to maintain proper isolation while keeping the board compact. Another challenge was implementing reliable relay driver circuitry with proper flyback protection to prevent voltage spikes from damaging the ESP32. The inclusion of BOOT and EN buttons alongside the UART header allows for one-click flashing using standard USB-to-serial adapters, making the development cycle fast and efficient. On-board LEDs provide immediate visual feedback on the status of each relay.",
+        schematicImage: "https://harmless-tapir-303.convex.cloud/api/storage/62642bc6-fc31-4238-8075-e179ad394587",
+        pcbLayoutImages: [
+          "https://harmless-tapir-303.convex.cloud/api/storage/a6b41efb-b5f4-4738-8f08-f0605eeb678c",
+          "https://harmless-tapir-303.convex.cloud/api/storage/e6ec72c3-ef7d-439a-bc67-12571ba06ad7"
+        ],
+        view3dImages: [
+          "https://harmless-tapir-303.convex.cloud/api/storage/be36e437-1a05-4427-a718-75b893ec6172",
+          "https://harmless-tapir-303.convex.cloud/api/storage/dc5d2379-ab89-429c-8c8d-ad79f0989957"
+        ],
+        layoutImages: [],
+        githubUrl: "https://github.com/Saie12/KiCAD-Home-Automation-with-ESP32-Project",
+        order: 2,
+      },
+      {
         title: "High-Speed Ethernet Interface",
         slug: "high-speed-ethernet-interface",
         summary: "6-layer PCB design for 100BASE-TX Ethernet with ARM Cortex-M4, featuring advanced signal integrity techniques.",
         heroImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop",
-        featured: true,
+        featured: false,
         technologies: ["KiCad", "6-Layer PCB", "Ethernet", "ARM Cortex-M4", "Differential Pairs", "EMI/EMC", "C"],
         concept: "Designed a robust Ethernet interface board using the STM32F407 microcontroller with integrated MAC and an external PHY (LAN8720A). The goal was to create a reliable 100Mbps Ethernet connection with proper EMI mitigation for industrial environments.",
         layoutStrategy: "Implemented a 6-layer stack-up optimized for high-speed signals: Top Signal - GND - Signal - Power - GND - Bottom Signal. The Ethernet differential pairs (TX+/TX-, RX+/RX-) were routed as 100-ohm controlled impedance with matched lengths within 50 mils. Used ground plane cutouts strategically to control impedance and minimize crosstalk. The magnetics module was placed close to the RJ45 connector with proper isolation.",
@@ -54,7 +77,7 @@ export const seed = mutation({
         ],
         layoutImages: [],
         githubUrl: "https://github.com",
-        order: 2,
+        order: 3,
       },
     ];
 
