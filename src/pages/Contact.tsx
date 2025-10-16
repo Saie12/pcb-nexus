@@ -188,18 +188,6 @@ export default function Contact() {
                   </h3>
                   <div className="space-y-3">
                     <a
-                      href="https://linkedin.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-gray-400 hover:text-[#0088ff] transition-colors group"
-                    >
-                      <div className="w-10 h-10 bg-[#0088ff]/10 border border-[#0088ff]/20 rounded-lg flex items-center justify-center mr-3 group-hover:bg-[#0088ff]/20 group-hover:shadow-[0_0_15px_rgba(0,136,255,0.3)] transition-all">
-                        <Linkedin size={20} className="text-[#0088ff]" />
-                      </div>
-                      <span className="text-sm">LinkedIn Profile</span>
-                    </a>
-
-                    <a
                       href="https://github.com"
                       target="_blank"
                       rel="noopener noreferrer"

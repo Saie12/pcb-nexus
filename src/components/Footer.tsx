@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Mail } from "lucide-react";
 import { Link } from "react-router";
 
 export default function Footer() {
@@ -48,14 +48,6 @@ export default function Footer() {
                 className="w-10 h-10 bg-[#111111] border border-[#00ff88]/20 rounded-lg flex items-center justify-center text-gray-400 hover:text-[#00ff88] hover:border-[#00ff88] hover:shadow-[0_0_15px_rgba(0,255,136,0.3)] transition-all"
               >
                 <Mail size={20} />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-[#111111] border border-[#0088ff]/20 rounded-lg flex items-center justify-center text-gray-400 hover:text-[#0088ff] hover:border-[#0088ff] hover:shadow-[0_0_15px_rgba(0,136,255,0.3)] transition-all"
-              >
-                <Linkedin size={20} />
               </a>
               <a
                 href="https://github.com"
