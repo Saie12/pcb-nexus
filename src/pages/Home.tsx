@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ProjectCard from "@/components/ProjectCard";
+import Shuffle from "@/components/Shuffle";
 import { motion } from "framer-motion";
 import { ArrowRight, Code, Cpu, Zap } from "lucide-react";
 import { Link } from "react-router";
@@ -11,31 +12,6 @@ import { Loader2 } from "lucide-react";
 
 export default function Home() {
   const featuredProjects = useQuery(api.projects.getFeatured);
-
-  // Animation variants for staggered text reveal
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.03,
-      },
-    },
-  };
-
-  const charVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
-  const headlineText = "Expert PCB Design and Hardware Prototyping";
-  const words = headlineText.split(" ");
 
   return (
     <div className="min-h-screen bg-[#111111]">
@@ -99,35 +75,40 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
-            <motion.h1
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight"
-            >
-              {words.map((word, wordIndex) => (
-                <span key={wordIndex} className="inline-block">
-                  {word.split("").map((char, charIndex) => (
-                    <motion.span
-                      key={`${wordIndex}-${charIndex}`}
-                      variants={charVariants}
-                      className={
-                        word === "Hardware" || word === "Prototyping"
-                          ? "bg-gradient-to-r from-[#00ff88] via-[#00BFFF] to-[#ff0080] bg-clip-text text-transparent"
-                          : word === "and"
-                          ? "text-[#00BFFF]/60"
-                          : ""
-                      }
-                      style={{ display: "inline-block" }}
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                  {wordIndex < words.length - 1 && <span> </span>}
-                  {wordIndex === 3 && <br />}
-                </span>
-              ))}
-            </motion.h1>
+            <div className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
+              <Shuffle
+                text="Expert PCB Design"
+                className="text-5xl md:text-7xl font-bold text-white"
+                shuffleDirection="right"
+                duration={0.35}
+                animationMode="evenodd"
+                shuffleTimes={1}
+                ease="power3.out"
+                stagger={0.03}
+                threshold={0.1}
+                triggerOnce={true}
+                triggerOnHover={false}
+                respectReducedMotion={true}
+                tag="h1"
+              />
+              <br />
+              <span className="text-[#00BFFF]/60">and </span>
+              <Shuffle
+                text="Hardware Prototyping"
+                className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#00ff88] via-[#00BFFF] to-[#ff0080] bg-clip-text text-transparent"
+                shuffleDirection="right"
+                duration={0.35}
+                animationMode="evenodd"
+                shuffleTimes={1}
+                ease="power3.out"
+                stagger={0.03}
+                threshold={0.1}
+                triggerOnce={true}
+                triggerOnHover={false}
+                respectReducedMotion={true}
+                tag="span"
+              />
+            </div>
 
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
               A detail-oriented electronics engineer specializing in high-speed
