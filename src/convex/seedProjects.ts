@@ -64,7 +64,7 @@ export const seed = mutation({
         slug: "high-speed-ethernet-interface",
         summary: "6-layer PCB design for 100BASE-TX Ethernet with ARM Cortex-M4, featuring advanced signal integrity techniques.",
         heroImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop",
-        featured: false,
+        featured: true,
         technologies: ["KiCad", "6-Layer PCB", "Ethernet", "ARM Cortex-M4", "Differential Pairs", "EMI/EMC", "C"],
         concept: "Designed a robust Ethernet interface board using the STM32F407 microcontroller with integrated MAC and an external PHY (LAN8720A). The goal was to create a reliable 100Mbps Ethernet connection with proper EMI mitigation for industrial environments.",
         layoutStrategy: "Implemented a 6-layer stack-up optimized for high-speed signals: Top Signal - GND - Signal - Power - GND - Bottom Signal. The Ethernet differential pairs (TX+/TX-, RX+/RX-) were routed as 100-ohm controlled impedance with matched lengths within 50 mils. Used ground plane cutouts strategically to control impedance and minimize crosstalk. The magnetics module was placed close to the RJ45 connector with proper isolation.",
