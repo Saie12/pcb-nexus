@@ -34,9 +34,22 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#00ff88] to-[#0088ff] rounded-lg flex items-center justify-center shadow-[0_0_20px_rgba(0,255,136,0.3)] group-hover:shadow-[0_0_30px_rgba(0,255,136,0.5)] transition-all">
-              <span className="text-[#0a0a0a] font-bold text-xl">S</span>
-            </div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="w-10 h-10 bg-gradient-to-br from-[#00ff88] to-[#0088ff] rounded-lg flex items-center justify-center shadow-[0_0_20px_rgba(0,255,136,0.3)] group-hover:shadow-[0_0_30px_rgba(0,255,136,0.5)] transition-all relative overflow-hidden"
+            >
+              <span className="text-[#0a0a0a] font-bold text-xl relative z-10">S</span>
+              <motion.div
+                className="absolute inset-0 opacity-0 group-hover:opacity-20"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 0.2 }}
+                transition={{ duration: 0.3 }}
+              >
+                <svg className="w-full h-full" viewBox="0 0 40 40">
+                  <path d="M5,20 L15,20 M25,20 L35,20 M20,5 L20,15 M20,25 L20,35" stroke="#0a0a0a" strokeWidth="1" />
+                </svg>
+              </motion.div>
+            </motion.div>
             <span className="text-xl font-bold text-white">Saiesh</span>
           </Link>
 

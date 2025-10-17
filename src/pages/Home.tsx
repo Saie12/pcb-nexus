@@ -55,9 +55,23 @@ export default function Home() {
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
               className="inline-block mb-6"
             >
-              <div className="w-20 h-20 bg-gradient-to-br from-[#00ff88] via-[#0088ff] to-[#ff0080] rounded-2xl flex items-center justify-center shadow-[0_0_40px_rgba(0,255,136,0.4)] mx-auto">
+              <motion.div
+                animate={{
+                  boxShadow: [
+                    "0 0 40px rgba(0,255,136,0.4)",
+                    "0 0 60px rgba(0,191,255,0.6)",
+                    "0 0 40px rgba(0,255,136,0.4)",
+                  ],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="w-20 h-20 bg-gradient-to-br from-[#00ff88] via-[#0088ff] to-[#ff0080] rounded-2xl flex items-center justify-center mx-auto"
+              >
                 <Cpu size={40} className="text-[#0a0a0a]" />
-              </div>
+              </motion.div>
             </motion.div>
 
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
