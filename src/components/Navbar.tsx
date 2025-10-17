@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
   const navLinks = [
@@ -18,8 +19,18 @@ export default function Navbar() {
 
   const isActive = (path: string) => location.pathname === path;
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-lg border-b border-[#00ff88]/20">
+    <nav className={`fixed top-0 left-0 right-0 z-50 border-b border-[#00ff88]/20 transition-all duration-300 ${
+      isScrolled ? "navbar-glass" : "bg-[#0a0a0a]/80 backdrop-blur-lg"
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2 group">
@@ -35,17 +46,17 @@ export default function Navbar() {
               <Link key={link.path} to={link.path}>
                 <Button
                   variant="ghost"
-                  className={`relative ${
+                  className={`relative interactive-lift ${
                     isActive(link.path)
-                      ? "text-[#00ff88]"
-                      : "text-gray-300 hover:text-white"
+                      ? "text-[#00BFFF]"
+                      : "text-gray-300 hover:text-[#00BFFF]"
                   }`}
                 >
                   {link.name}
                   {isActive(link.path) && (
                     <motion.div
                       layoutId="navbar-indicator"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#00ff88] shadow-[0_0_10px_rgba(0,255,136,0.5)]"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#00BFFF] shadow-[0_0_10px_rgba(0,191,255,0.5)]"
                     />
                   )}
                 </Button>
@@ -79,7 +90,7 @@ export default function Navbar() {
                     variant="ghost"
                     className={`w-full justify-start ${
                       isActive(link.path)
-                        ? "text-[#00ff88] bg-[#00ff88]/10"
+                        ? "text-[#00BFFF] bg-[#00BFFF]/10"
                         : "text-gray-300"
                     }`}
                   >
