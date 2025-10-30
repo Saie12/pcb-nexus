@@ -7,55 +7,25 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
   const location = useLocation();
 
   const navLinks = [
-    { name: "Home", path: "#home" },
-    { name: "Services", path: "#services" },
-    { name: "About", path: "#about" },
-    { name: "Projects", path: "#projects" },
-    { name: "Contact", path: "#contact" },
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+    { name: "Projects", path: "/projects" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
   ];
 
-  const isActive = (path: string) => {
-    if (location.pathname === "/") {
-      return `#${activeSection}` === path;
-    }
-    return false;
-  };
+  const isActive = (path: string) => location.pathname === path;
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-
-      // Detect active section based on scroll position
-      const sections = ["home", "services", "about", "projects", "contact"];
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
-    if (path.startsWith("#")) {
-      e.preventDefault();
-      const element = document.getElementById(path.substring(1));
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-      setIsOpen(false);
-    }
-  };
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 border-b border-[#00ff88]/20 transition-all duration-300 ${
@@ -86,11 +56,7 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => (
-              <a
-                key={link.path}
-                href={link.path}
-                onClick={(e) => handleNavClick(e, link.path)}
-              >
+              <Link key={link.path} to={link.path}>
                 <Button
                   variant="ghost"
                   className={`relative interactive-lift ${
@@ -107,7 +73,7 @@ export default function Navbar() {
                     />
                   )}
                 </Button>
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -132,11 +98,7 @@ export default function Navbar() {
           >
             <div className="px-4 py-4 space-y-2">
               {navLinks.map((link) => (
-                <a
-                  key={link.path}
-                  href={link.path}
-                  onClick={(e) => handleNavClick(e, link.path)}
-                >
+                <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)}>
                   <Button
                     variant="ghost"
                     className={`w-full justify-start ${
@@ -147,7 +109,7 @@ export default function Navbar() {
                   >
                     {link.name}
                   </Button>
-                </a>
+                </Link>
               ))}
             </div>
           </motion.div>
