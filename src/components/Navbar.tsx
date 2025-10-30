@@ -37,73 +37,109 @@ export default function Navbar() {
         initial={{ opacity: 1 }}
         animate={{ 
           opacity: isCollapsed ? 0 : 1,
-          y: isCollapsed ? -100 : 0,
+          scale: isCollapsed ? 0.3 : 1,
+          y: isCollapsed ? -50 : 0,
+          x: isCollapsed ? window.innerWidth / 2 - 100 : 0,
+          borderRadius: isCollapsed ? "50%" : "0px",
           pointerEvents: isCollapsed ? "none" : "auto"
         }}
-        transition={{ duration: 0.3 }}
+        transition={{ 
+          duration: 0.6,
+          ease: [0.32, 0.72, 0, 1],
+          scale: { duration: 0.5 },
+          borderRadius: { duration: 0.4 }
+        }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled ? "navbar-glass border-b border-[#00ff88]/20" : "bg-[#0a0a0a]/80 backdrop-blur-lg border-b border-[#00ff88]/20"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link to="/" className="flex items-center space-x-2 group">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="w-10 h-10 bg-gradient-to-br from-[#00ff88] to-[#0088ff] rounded-lg flex items-center justify-center shadow-[0_0_20px_rgba(0,255,136,0.3)] group-hover:shadow-[0_0_30px_rgba(0,255,136,0.5)] transition-all relative overflow-hidden"
-              >
-                <span className="text-[#0a0a0a] font-bold text-xl relative z-10">S</span>
+            <motion.div
+              animate={{
+                scale: isCollapsed ? 0 : 1,
+                opacity: isCollapsed ? 0 : 1,
+                x: isCollapsed ? 200 : 0,
+              }}
+              transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
+            >
+              <Link to="/" className="flex items-center space-x-2 group">
                 <motion.div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-20"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 0.2 }}
-                  transition={{ duration: 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                  className="w-10 h-10 bg-gradient-to-br from-[#00ff88] to-[#0088ff] rounded-lg flex items-center justify-center shadow-[0_0_20px_rgba(0,255,136,0.3)] group-hover:shadow-[0_0_30px_rgba(0,255,136,0.5)] transition-all relative overflow-hidden"
                 >
-                  <svg className="w-full h-full" viewBox="0 0 40 40">
-                    <path d="M5,20 L15,20 M25,20 L35,20 M20,5 L20,15 M20,25 L20,35" stroke="#0a0a0a" strokeWidth="1" />
-                  </svg>
+                  <span className="text-[#0a0a0a] font-bold text-xl relative z-10">S</span>
+                  <motion.div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-20"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 0.2 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <svg className="w-full h-full" viewBox="0 0 40 40">
+                      <path d="M5,20 L15,20 M25,20 L35,20 M20,5 L20,15 M20,25 L20,35" stroke="#0a0a0a" strokeWidth="1" />
+                    </svg>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-              <span className="text-xl font-bold text-white">Saiesh</span>
-            </Link>
+                <span className="text-xl font-bold text-white">Saiesh</span>
+              </Link>
+            </motion.div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
-              {navLinks.map((link) => (
-                <Link key={link.path} to={link.path}>
-                  <Button
-                    variant="ghost"
-                    className={`relative interactive-lift ${
-                      isActive(link.path)
-                        ? "text-[#00BFFF]"
-                        : "text-gray-300 hover:text-[#00BFFF]"
-                    }`}
-                  >
-                    {link.name}
-                    {isActive(link.path) && (
-                      <motion.div
-                        layoutId="navbar-indicator"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#00BFFF] shadow-[0_0_10px_rgba(0,191,255,0.5)]"
-                      />
-                    )}
-                  </Button>
-                </Link>
+              {navLinks.map((link, index) => (
+                <motion.div
+                  key={link.path}
+                  animate={{
+                    scale: isCollapsed ? 0 : 1,
+                    opacity: isCollapsed ? 0 : 1,
+                    x: isCollapsed ? -100 - (index * 20) : 0,
+                  }}
+                  transition={{ 
+                    duration: 0.4, 
+                    delay: isCollapsed ? index * 0.02 : 0,
+                    ease: [0.32, 0.72, 0, 1]
+                  }}
+                >
+                  <Link to={link.path}>
+                    <Button
+                      variant="ghost"
+                      className={`relative interactive-lift ${
+                        isActive(link.path)
+                          ? "text-[#00BFFF]"
+                          : "text-gray-300 hover:text-[#00BFFF]"
+                      }`}
+                    >
+                      {link.name}
+                      {isActive(link.path) && (
+                        <motion.div
+                          layoutId="navbar-indicator"
+                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#00BFFF] shadow-[0_0_10px_rgba(0,191,255,0.5)]"
+                        />
+                      )}
+                    </Button>
+                  </Link>
+                </motion.div>
               ))}
             </div>
 
             {/* Mobile Menu Button */}
-            <button
+            <motion.button
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden text-white p-2"
+              animate={{
+                scale: isCollapsed ? 0 : 1,
+                opacity: isCollapsed ? 0 : 1,
+              }}
+              transition={{ duration: 0.3 }}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            </motion.button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         <AnimatePresence>
-          {isOpen && (
+          {isOpen && !isCollapsed && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
@@ -138,7 +174,12 @@ export default function Navbar() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 400, 
+              damping: 30,
+              delay: 0.2
+            }}
             className="fixed top-6 right-6 z-50"
           >
             <motion.button
