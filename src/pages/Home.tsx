@@ -8,7 +8,7 @@ import CTASection from "@/components/sections/CTASection";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#111111]">
+    <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
       <FeaturedProjectsSection />
