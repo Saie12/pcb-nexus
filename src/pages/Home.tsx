@@ -5,10 +5,12 @@ import FeaturedProjectsSection from "@/components/sections/FeaturedProjectsSecti
 import ServicesSection from "@/components/sections/ServicesSection";
 import AboutSection from "@/components/sections/AboutSection";
 import CTASection from "@/components/sections/CTASection";
+import ParticleBackground from "@/components/ParticleBackground";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <ParticleBackground />
       <Navbar />
       <HeroSection />
       <FeaturedProjectsSection />
