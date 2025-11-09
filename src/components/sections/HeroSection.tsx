@@ -10,6 +10,19 @@ import FloatingElement from "@/components/animations/FloatingElement";
 export default function HeroSection() {
   return (
     <section className="relative pt-32 pb-24 px-6 sm:px-8 min-h-[80vh] flex items-center overflow-hidden">
+      {/* Animated gradient background */}
+      <motion.div
+        className="absolute inset-0 opacity-30"
+        animate={{
+          background: [
+            "radial-gradient(circle at 20% 50%, rgba(0, 0, 0, 0.05) 0%, transparent 50%)",
+            "radial-gradient(circle at 80% 50%, rgba(0, 0, 0, 0.05) 0%, transparent 50%)",
+            "radial-gradient(circle at 20% 50%, rgba(0, 0, 0, 0.05) 0%, transparent 50%)",
+          ],
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+      />
+
       {/* Floating decorative elements */}
       <FloatingElement delay={0} duration={4} className="absolute top-20 right-10 w-20 h-20 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full blur-xl" />
       <FloatingElement delay={1} duration={5} className="absolute bottom-40 left-10 w-32 h-32 bg-gradient-to-br from-accent/10 to-accent/5 rounded-full blur-xl" />
@@ -23,10 +36,16 @@ export default function HeroSection() {
           className="space-y-8"
         >
           <div className="space-y-4">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight text-balance">
-              <Shuffle text="PCB Design &" className="block" />
-              <Shuffle text="Hardware Prototyping" className="block" delay={200} />
-            </h1>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+            >
+              <h1 className="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight text-balance">
+                <Shuffle text="PCB Design &" className="block" />
+                <Shuffle text="Hardware Prototyping" className="block" delay={200} />
+              </h1>
+            </motion.div>
             <StaggerText 
               text="Electronics engineer specializing in high-speed board design, embedded firmware, and rapid prototyping using KiCad, C++, and Python."
               className="text-xl text-muted-foreground max-w-2xl"
