@@ -6,6 +6,7 @@ import Shuffle from "@/components/Shuffle";
 import MagneticButton from "@/components/animations/MagneticButton";
 import StaggerText from "@/components/animations/StaggerText";
 import FloatingElement from "@/components/animations/FloatingElement";
+import VariableProximity from "@/components/animations/VariableProximity";
 
 export default function HeroSection() {
   return (
@@ -54,10 +55,9 @@ export default function HeroSection() {
                 <Shuffle text="Hardware Prototyping" className="block" delay={200} />
               </h1>
             </motion.div>
-            <StaggerText 
+            <VariableProximity 
               text="Electronics engineer specializing in high-speed board design, embedded firmware, and rapid prototyping using KiCad, C++, and Python."
               className="text-xl text-muted-foreground max-w-2xl"
-              delay={0.4}
             />
           </div>
 
