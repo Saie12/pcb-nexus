@@ -2,7 +2,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap');
 @custom-variant dark (&:is(.dark *));
 
 /* DO NOT CHANGE */
@@ -129,9 +128,9 @@
   
   /* Rubik Bubbles font class */
   .rubik-bubbles-regular {
-    font-family: "Rubik Bubbles", system-ui;
-    font-weight: 400;
-    font-style: normal;
+    font-family: "Rubik Bubbles", system-ui !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
   }
   
   /* Apple-style glassmorphism support */
