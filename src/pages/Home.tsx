@@ -5,12 +5,12 @@ import FeaturedProjectsSection from "@/components/sections/FeaturedProjectsSecti
 import ServicesSection from "@/components/sections/ServicesSection";
 import AboutSection from "@/components/sections/AboutSection";
 import CTASection from "@/components/sections/CTASection";
-import ParticleBackground from "@/components/ParticleBackground";
+import LightRays from "@/components/LightRays";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background relative">
-      <ParticleBackground />
+      <LightRays />
       <Navbar />
       <HeroSection />
       <FeaturedProjectsSection />
