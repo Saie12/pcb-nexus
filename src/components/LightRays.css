@@ -8,4 +8,5 @@
   overflow: hidden;
   opacity: 1.0;
   mix-blend-mode: screen;
+  z-index: 1;
 }
