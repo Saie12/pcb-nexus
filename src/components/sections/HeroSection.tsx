@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 import Shuffle from "@/components/Shuffle";
+import VariableProximity from "@/components/animations/VariableProximity";
 import MagneticButton from "@/components/animations/MagneticButton";
 import StaggerText from "@/components/animations/StaggerText";
 import FloatingElement from "@/components/animations/FloatingElement";
@@ -50,8 +51,22 @@ export default function HeroSection() {
                   letterSpacing: '0.05em'
                 }}
               >
-                <Shuffle text="PCB Design &" className="block" />
-                <Shuffle text="Hardware Prototyping" className="block" delay={200} />
+                <VariableProximity 
+                  label="PCB Design &" 
+                  className="block"
+                  fromFontVariationSettings="'wght' 400"
+                  toFontVariationSettings="'wght' 700"
+                  radius={120}
+                  falloff="exponential"
+                />
+                <VariableProximity 
+                  label="Hardware Prototyping" 
+                  className="block"
+                  fromFontVariationSettings="'wght' 400"
+                  toFontVariationSettings="'wght' 700"
+                  radius={120}
+                  falloff="exponential"
+                />
               </h1>
             </motion.div>
             <StaggerText 
