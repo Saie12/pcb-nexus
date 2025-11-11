@@ -27,8 +27,8 @@ export default function CustomCursor() {
       
       lastPosition.current = { x: e.clientX, y: e.clientY, time: now };
       setMousePosition({ x: e.clientX, y: e.clientY });
-      cursorX.set(e.clientX - 16);
-      cursorY.set(e.clientY - 16);
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -110,13 +110,18 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Main cursor ring */}
+      {/* Soldering Iron Tip Cursor */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 pointer-events-none z-[9999] mix-blend-difference"
-        style={{ x: cursorX, y: cursorY }}
+        className="fixed pointer-events-none z-[9999] mix-blend-difference"
+        style={{ 
+          x: cursorX, 
+          y: cursorY,
+          left: -12,
+          top: -12,
+        }}
         animate={{
-          scale: isHovering ? 1.8 : isClicking ? 0.8 : 1 + velocity * 0.1,
-          rotate: isHovering ? 90 : velocity * 10,
+          scale: isHovering ? 1.3 : isClicking ? 0.9 : 1 + velocity * 0.08,
+          rotate: isHovering ? 15 : velocity * 8,
         }}
         transition={{
           type: "spring",
@@ -124,10 +129,37 @@ export default function CustomCursor() {
           damping: 25,
         }}
       >
-        <div className="w-full h-full rounded-full border-2 border-[#00ff88] bg-[#00ff88]/20" />
+        {/* Soldering Iron Tip SVG */}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Iron tip (pointed) */}
+          <path
+            d="M12 2 L8 8 L10 8 L10 14 L14 14 L14 8 L16 8 Z"
+            fill="#C0C0C0"
+            stroke="#808080"
+            strokeWidth="0.5"
+          />
+          {/* Hot tip glow */}
+          <circle
+            cx="12"
+            cy="3"
+            r="2"
+            fill="#FF6B35"
+            opacity={0.8 + velocity * 0.1}
+            filter="url(#tip-glow)"
+          />
+          <defs>
+            <filter id="tip-glow">
+              <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+        </svg>
       </motion.div>
 
-      {/* Lightning bolts with jagged paths */}
+      {/* Lightning bolts emanating from the tip */}
       {lightningBolts.map((bolt) => (
         <motion.svg
           key={bolt.id}
@@ -151,14 +183,14 @@ export default function CustomCursor() {
         >
           <path
             d={bolt.path}
-            stroke="#00BFFF"
+            stroke="#FF6B35"
             strokeWidth="2"
             fill="none"
             strokeLinecap="round"
-            filter="url(#glow)"
+            filter="url(#lightning-glow)"
           />
           <defs>
-            <filter id="glow">
+            <filter id="lightning-glow">
               <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
               <feMerge>
                 <feMergeNode in="coloredBlur"/>
@@ -169,7 +201,7 @@ export default function CustomCursor() {
         </motion.svg>
       ))}
 
-      {/* Electric glow effect */}
+      {/* Electric glow effect around the tip */}
       {velocity > 2 && (
         <motion.div
           className="fixed pointer-events-none z-[9997] rounded-full"
@@ -192,35 +224,12 @@ export default function CustomCursor() {
           <div
             className="w-full h-full rounded-full"
             style={{
-              background: `radial-gradient(circle, rgba(0, 191, 255, ${velocity * 0.15}) 0%, transparent 70%)`,
-              boxShadow: `0 0 ${velocity * 8}px rgba(0, 191, 255, ${velocity * 0.2})`,
+              background: `radial-gradient(circle, rgba(255, 107, 53, ${velocity * 0.15}) 0%, transparent 70%)`,
+              boxShadow: `0 0 ${velocity * 8}px rgba(255, 107, 53, ${velocity * 0.2})`,
             }}
           />
         </motion.div>
       )}
-
-      {/* Center dot */}
-      <motion.div
-        className="fixed top-0 left-0 w-2 h-2 pointer-events-none z-[9999] mix-blend-difference"
-        animate={{
-          x: mousePosition.x - 4,
-          y: mousePosition.y - 4,
-          scale: isClicking ? 0.5 : 1 + velocity * 0.05,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 1000,
-          damping: 35,
-          mass: 0.2,
-        }}
-      >
-        <div 
-          className="w-full h-full rounded-full bg-[#00BFFF]"
-          style={{
-            boxShadow: velocity > 1 ? `0 0 ${velocity * 3}px #00BFFF` : 'none',
-          }}
-        />
-      </motion.div>
     </>
   );
 }
