@@ -15,16 +15,16 @@ export default function Home() {
         <LightRays 
           raysOrigin="top-center"
           raysColor="#ffffff"
-          raysSpeed={0.5}
-          lightSpread={1.5}
-          rayLength={2}
+          raysSpeed={1.0}
+          lightSpread={2.0}
+          rayLength={3}
           pulsating={true}
-          fadeDistance={1.2}
-          saturation={0.8}
+          fadeDistance={1.5}
+          saturation={1.0}
           followMouse={true}
-          mouseInfluence={0.15}
-          noiseAmount={0.1}
-          distortion={0.05}
+          mouseInfluence={0.2}
+          noiseAmount={0.05}
+          distortion={0.1}
         />
       </div>
       
