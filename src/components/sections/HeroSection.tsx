@@ -44,7 +44,7 @@ export default function HeroSection() {
               <h1 
                 className="text-5xl sm:text-6xl md:text-7xl text-balance text-gray-200"
                 style={{ 
-                  fontFamily: '"Rubik Bubbles", system-ui', 
+                  fontFamily: '"Audiowide", sans-serif', 
                   fontWeight: 400, 
                   fontStyle: 'normal',
                   letterSpacing: '0.05em'

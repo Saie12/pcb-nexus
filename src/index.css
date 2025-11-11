@@ -1,7 +1,7 @@
 /* DO NOT CHANGE */
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 @custom-variant dark (&:is(.dark *));
 
 /* DO NOT CHANGE */
@@ -126,11 +126,11 @@
     letter-spacing: -0.02em;
   }
   
-  /* Rubik Bubbles font class */
-  .rubik-bubbles-regular {
-    font-family: "Rubik Bubbles", system-ui !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
+  /* Audiowide font class */
+  .audiowide-regular {
+    font-family: "Audiowide", sans-serif;
+    font-weight: 400;
+    font-style: normal;
   }
   
   /* Apple-style glassmorphism support */
