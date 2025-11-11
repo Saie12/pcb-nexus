@@ -6,6 +6,7 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [velocity, setVelocity] = useState(0);
+  const [movementAngle, setMovementAngle] = useState(0);
   const lastPosition = useRef({ x: 0, y: 0, time: Date.now() });
   const velocityDecayRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -22,6 +23,13 @@ export default function CustomCursor() {
         const dy = e.clientY - lastPosition.current.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         const speed = distance / dt;
+        
+        // Calculate movement angle (opposite direction)
+        if (distance > 0) {
+          const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+          // Add 180 degrees to get opposite direction
+          setMovementAngle((angle + 180) % 360);
+        }
         
         // Normalized velocity: 0-10 scale with clear thresholds
         const normalizedVelocity = Math.min(speed / 8, 10);
@@ -153,7 +161,9 @@ export default function CustomCursor() {
     const speedRatio = Math.max(0, Math.min((velocity - 2) / 6, 1));
     
     return Array.from({ length: boltCount }, (_, i) => {
-      const angle = (i / boltCount) * 360 + Math.random() * 40;
+      // Spread bolts around the opposite direction of movement
+      const spreadAngle = ((i / boltCount) * 120 - 60) + Math.random() * 30;
+      const angle = movementAngle + spreadAngle;
       const length = baseLength + Math.random() * 5;
       
       // Smooth color transition: blue (0,136,255) -> orange (255,140,0)
