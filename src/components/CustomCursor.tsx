@@ -7,9 +7,10 @@ export default function CustomCursor() {
   const [isClicking, setIsClicking] = useState(false);
   const [velocity, setVelocity] = useState(0);
   const lastPosition = useRef({ x: 0, y: 0, time: Date.now() });
+  const velocityDecayRef = useRef<NodeJS.Timeout | null>(null);
 
-  const cursorX = useSpring(0, { stiffness: 500, damping: 28 });
-  const cursorY = useSpring(0, { stiffness: 500, damping: 28 });
+  const cursorX = useSpring(0, { stiffness: 600, damping: 30 });
+  const cursorY = useSpring(0, { stiffness: 600, damping: 30 });
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
@@ -22,7 +23,19 @@ export default function CustomCursor() {
         const distance = Math.sqrt(dx * dx + dy * dy);
         const speed = distance / dt;
         
-        setVelocity(Math.min(speed / 10, 10));
+        // Normalized velocity: 0-10 scale with clear thresholds
+        const normalizedVelocity = Math.min(speed / 8, 10);
+        setVelocity(normalizedVelocity);
+        
+        // Clear any existing decay timeout
+        if (velocityDecayRef.current) {
+          clearTimeout(velocityDecayRef.current);
+        }
+        
+        // Decay velocity to 0 after 100ms of no movement
+        velocityDecayRef.current = setTimeout(() => {
+          setVelocity(0);
+        }, 100);
       }
       
       lastPosition.current = { x: e.clientX, y: e.clientY, time: now };
@@ -58,12 +71,15 @@ export default function CustomCursor() {
       window.removeEventListener("mouseover", handleMouseOver);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
+      if (velocityDecayRef.current) {
+        clearTimeout(velocityDecayRef.current);
+      }
     };
   }, [cursorX, cursorY]);
 
   // Generate natural lightning bolt paths with jagged, branching effect
   const generateLightningPath = (angle: number, length: number) => {
-    const segments = Math.floor(length / 8) + 3;
+    const segments = Math.max(3, Math.floor(length / 6));
     let path = "M 0 0";
     let currentX = 0;
     let currentY = 0;
@@ -73,8 +89,8 @@ export default function CustomCursor() {
     const baseDirectionY = Math.sin(angleRad);
     
     for (let i = 0; i < segments; i++) {
-      const segmentLength = (length / segments) * (0.8 + Math.random() * 0.4);
-      const jitter = (Math.random() - 0.5) * 25;
+      const segmentLength = (length / segments) * (0.7 + Math.random() * 0.6);
+      const jitter = (Math.random() - 0.5) * 20;
       
       currentX += baseDirectionX * segmentLength + jitter;
       currentY += baseDirectionY * segmentLength + jitter;
@@ -82,9 +98,9 @@ export default function CustomCursor() {
       path += ` L ${currentX} ${currentY}`;
       
       // Add occasional branches for natural look
-      if (Math.random() > 0.65 && i < segments - 2) {
-        const branchLength = segmentLength * (0.4 + Math.random() * 0.3);
-        const branchAngle = (Math.random() - 0.5) * 60;
+      if (Math.random() > 0.7 && i < segments - 2 && i > 0) {
+        const branchLength = segmentLength * (0.3 + Math.random() * 0.4);
+        const branchAngle = (Math.random() - 0.5) * 70;
         const branchRad = ((angle + branchAngle) * Math.PI) / 180;
         const branchX = currentX + Math.cos(branchRad) * branchLength;
         const branchY = currentY + Math.sin(branchRad) * branchLength;
@@ -97,34 +113,55 @@ export default function CustomCursor() {
   };
 
   const generateLightningBolts = () => {
-    const boltCount = Math.max(2, Math.floor(velocity * 1.2));
+    // Clear speed thresholds
+    // 0-1: no bolts
+    // 1-3: 2-3 bolts, 8-12px length
+    // 3-6: 3-5 bolts, 12-20px length
+    // 6-10: 5-8 bolts, 20-30px length
+    
+    let boltCount: number;
+    let baseLength: number;
+    
+    if (velocity < 1) {
+      return [];
+    } else if (velocity < 3) {
+      boltCount = 2 + Math.floor(Math.random() * 2);
+      baseLength = 8 + velocity * 1.5;
+    } else if (velocity < 6) {
+      boltCount = 3 + Math.floor(velocity * 0.5);
+      baseLength = 12 + velocity * 1.5;
+    } else {
+      boltCount = 5 + Math.floor(velocity * 0.4);
+      baseLength = 20 + velocity * 1.2;
+    }
+    
     const speedRatio = Math.min(velocity / 10, 1);
     
     return Array.from({ length: boltCount }, (_, i) => {
-      const angle = (i / boltCount) * 360 + Math.random() * 30;
-      const length = 8 + velocity * 4 + Math.random() * 6;
+      const angle = (i / boltCount) * 360 + Math.random() * 40;
+      const length = baseLength + Math.random() * 5;
       
-      // Color transition: blue at low speed -> orange at high speed
-      const blueAmount = Math.max(0, 1 - speedRatio * 1.5);
-      const orangeAmount = Math.min(1, speedRatio * 1.2);
+      // Smooth color transition: blue (0,136,255) -> orange (255,107,53)
+      const blueAmount = Math.max(0, 1 - speedRatio * 1.3);
+      const orangeAmount = Math.min(1, speedRatio * 1.1);
       
       const r = Math.floor(0 * blueAmount + 255 * orangeAmount);
       const g = Math.floor(136 * blueAmount + 107 * orangeAmount);
       const b = Math.floor(255 * blueAmount + 53 * orangeAmount);
       
       return {
-        id: i,
+        id: `${i}-${Date.now()}`,
         angle,
         length,
         path: generateLightningPath(angle, length),
         color: `rgb(${r}, ${g}, ${b})`,
-        opacity: 0.5 + velocity * 0.05 + Math.random() * 0.2,
-        strokeWidth: 1.5 + velocity * 0.3,
+        opacity: 0.6 + speedRatio * 0.3,
+        strokeWidth: 1.2 + speedRatio * 0.5,
       };
     });
   };
 
-  const lightningBolts = velocity > 0.5 ? generateLightningBolts() : [];
+  const lightningBolts = generateLightningBolts();
 
   // Calculate glow color based on speed
   const speedRatio = Math.min(velocity / 10, 1);
@@ -197,12 +234,13 @@ export default function CustomCursor() {
           }}
           initial={{ opacity: 0 }}
           animate={{
-            opacity: [bolt.opacity, bolt.opacity * 0.7, bolt.opacity],
+            opacity: [bolt.opacity, bolt.opacity * 0.6, bolt.opacity],
           }}
           transition={{
-            duration: 0.08 + Math.random() * 0.05,
+            duration: 0.06,
             repeat: Infinity,
             repeatType: "reverse",
+            ease: "linear",
           }}
         >
           <g transform={`rotate(${bolt.angle} 0 0)`}>
