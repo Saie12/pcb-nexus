@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Briefcase, User, Mail, FolderOpen } from "lucide-react";
+import GooeyNav from "@/components/GooeyNav";
 
 export default function Navbar() {
   const location = useLocation();
@@ -30,14 +30,17 @@ export default function Navbar() {
     return () => unsubscribe();
   }, [scrollY]);
 
-  const navLinks = [
-    { name: "Work", path: "/projects", icon: FolderOpen },
-    { name: "Services", path: "/services", icon: Briefcase },
-    { name: "About", path: "/about", icon: User },
-    { name: "Contact", path: "/contact", icon: Mail },
+  const navItems = [
+    { label: "Work", href: "/projects" },
+    { label: "Services", href: "/services" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const getActiveIndex = () => {
+    const index = navItems.findIndex(item => item.href === location.pathname);
+    return index >= 0 ? index : 0;
+  };
 
   return (
     <motion.nav 
@@ -73,32 +76,17 @@ export default function Navbar() {
             </motion.span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-1 relative z-10">
-            {navLinks.map((link) => {
-              const Icon = link.icon;
-              return (
-                <Link key={link.path} to={link.path}>
-                  <Button
-                    variant="ghost"
-                    className={`relative flex items-center gap-2 transition-all duration-200 ${
-                      isActive(link.path)
-                        ? "text-foreground bg-secondary/50"
-                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/30"
-                    }`}
-                  >
-                    <Icon size={16} className="opacity-70" />
-                    {link.name}
-                    {isActive(link.path) && (
-                      <motion.div
-                        layoutId="navbar-indicator"
-                        className="absolute bottom-0 left-0 right-0 h-px bg-foreground"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                  </Button>
-                </Link>
-              );
-            })}
+          <div className="hidden md:flex items-center relative z-10">
+            <GooeyNav
+              items={navItems}
+              particleCount={15}
+              particleDistances={[90, 10]}
+              particleR={100}
+              initialActiveIndex={getActiveIndex()}
+              animationTime={600}
+              timeVariance={300}
+              colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+            />
           </div>
 
           <div className="md:hidden relative z-10">
