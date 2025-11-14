@@ -1,4 +1,4 @@
-import ProjectCard from "@/components/ProjectCard";
+import ProjectCarousel from "@/components/ProjectCarousel";
 import { motion } from "framer-motion";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
@@ -43,19 +43,7 @@ export default function FeaturedProjectsSection() {
             <p className="text-muted-foreground">No featured projects yet. Check back soon!</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProjects.map((project, index) => (
-              <RevealOnScroll key={project._id} delay={index * 0.15} direction="up">
-                <ProjectCard
-                  title={project.title}
-                  summary={project.summary}
-                  image={project.heroImage}
-                  slug={project.slug}
-                  technologies={project.technologies}
-                />
-              </RevealOnScroll>
-            ))}
-          </div>
+          <ProjectCarousel projects={featuredProjects} />
         )}
       </div>
     </motion.section>
