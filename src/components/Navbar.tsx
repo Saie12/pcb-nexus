@@ -149,11 +149,12 @@ export default function Navbar() {
           <div className="pointer-events-auto">
             <Dock
               items={dockItems}
-              magnification={70}
-              distance={200}
-              panelHeight={68}
-              baseItemSize={50}
-              spring={{ mass: 0.1, stiffness: 150, damping: 12 }}
+              magnification={60}
+              distance={140}
+              panelHeight={64}
+              baseItemSize={48}
+              dockHeight={120}
+              spring={{ mass: 0.1, stiffness: 200, damping: 15 }}
             />
           </div>
         </motion.div>
