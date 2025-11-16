@@ -31,7 +31,7 @@ const skillData: Record<string, Array<{ name: string; logo: string }>> = {
     { name: 'KiCad', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/59/KiCad-Logo.svg' },
     { name: 'Altium', logo: 'https://cdn.brandfetch.io/idMJBtjmlS/w/400/h/400/theme/dark/icon.png?c=1bxid64Mup7aczewSAYMX&t=1760410315440' },
     { name: 'Eagle', logo: 'https://harmless-tapir-303.convex.cloud/api/storage/8a4cb0bf-4622-4ab1-95e3-222e27df31c6' },
-    { name: 'Proteus', logo: 'https://www.labcenter.com/images/proteus_icon.png' }
+    { name: 'Proteus', logo: 'https://harmless-tapir-303.convex.cloud/api/storage/23b7cd07-646a-41c0-b0b5-9e00429968e4' }
   ],
   'Design Concepts': [
     { name: 'High-Speed Design', logo: 'https://cdn-icons-png.flaticon.com/512/2920/2920235.png' },
