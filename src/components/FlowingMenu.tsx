@@ -59,7 +59,7 @@ const skillData: Record<string, Array<{ name: string; logo: string }>> = {
     { name: 'GitLab', logo: 'https://about.gitlab.com/images/press/logo/png/gitlab-icon-rgb.png' }
   ],
   'Simulation & Prototyping': [
-    { name: 'LTspice', logo: 'https://harmless-tapir-303.convex.cloud/api/storage/b1a775b0-805e-49ad-a1e2-cba898af97e6' },
+    { name: 'LTspice', logo: 'https://harmless-tapir-303.convex.cloud/api/storage/6dd28a8d-40af-430a-a34f-bd337193f621' },
     { name: 'Proteus', logo: 'https://harmless-tapir-303.convex.cloud/api/storage/23b7cd07-646a-41c0-b0b5-9e00429968e4' },
     { name: 'Breadboard', logo: 'https://cdn-icons-png.flaticon.com/512/2103/2103658.png' },
     { name: 'Oscilloscope', logo: 'https://cdn-icons-png.flaticon.com/512/3176/3176369.png' }
