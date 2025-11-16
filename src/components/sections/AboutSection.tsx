@@ -59,7 +59,7 @@ export default function AboutSection() {
           Passionate about turning innovative ideas into functional hardware
         </motion.p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -106,15 +106,14 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="h-full"
           >
-            <div className="bg-card border border-border rounded-xl h-full hover:shadow-lg transition-shadow overflow-hidden">
-              <div className="p-6">
-                <h3 className="text-3xl font-bold text-foreground mb-4">
+            <div className="bg-card border border-border rounded-xl hover:shadow-lg transition-shadow overflow-hidden">
+              <div className="p-6 pb-4">
+                <h3 className="text-3xl font-bold text-foreground mb-2">
                   Core Competencies
                 </h3>
               </div>
-              <div style={{ height: '500px', position: 'relative' }}>
+              <div className="w-full" style={{ height: '500px', position: 'relative' }}>
                 <FlowingMenu items={skillsMenuItems} />
               </div>
             </div>
