@@ -1,44 +1,40 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Code, Cpu, Zap, GitBranch } from "lucide-react";
 import Shuffle from "@/components/Shuffle";
+import FlowingMenu from "@/components/FlowingMenu";
 
 export default function AboutSection() {
-  const skills = [
+  const skillsMenuItems = [
     {
-      category: "EDA Tools",
-      items: ["KiCad (Schematic Capture, PCB Layout, 3D Rendering, Gerber Generation)"],
-      icon: Cpu,
+      link: "#eda-tools",
+      text: "EDA Tools",
+      image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop"
     },
     {
-      category: "Design Concepts",
-      items: [
-        "High-Speed Design (Impedance Control, Differential Pairs, Length Matching)",
-        "EMI/EMC",
-        "DFM",
-      ],
-      icon: Zap,
+      link: "#design-concepts",
+      text: "Design Concepts",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop"
     },
     {
-      category: "Microcontrollers & IDEs",
-      items: ["PIC", "8051", "ARM Cortex-M", "MPLAB X IDE", "Keil IDE"],
-      icon: Cpu,
+      link: "#microcontrollers",
+      text: "Microcontrollers & IDEs",
+      image: "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=600&h=400&fit=crop"
     },
     {
-      category: "Programming",
-      items: ["C", "C++", "Python (for scripting and automation)"],
-      icon: Code,
+      link: "#programming",
+      text: "Programming",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop"
     },
     {
-      category: "Version Control & Collaboration",
-      items: ["Git", "GitHub", "CadLab"],
-      icon: GitBranch,
+      link: "#version-control",
+      text: "Version Control",
+      image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=600&h=400&fit=crop"
     },
     {
-      category: "Simulation & Prototyping",
-      items: ["SPICE", "Soldering (SMD/THT)", "Lab equipment"],
-      icon: Zap,
-    },
+      link: "#simulation",
+      text: "Simulation & Prototyping",
+      image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop"
+    }
   ];
 
   return (
@@ -110,48 +106,18 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
+            className="h-full"
           >
-            <Card className="bg-card border-border h-full hover:shadow-lg transition-shadow">
-              <CardContent className="p-8">
-                <h3 className="text-3xl font-bold text-foreground mb-6">
+            <div className="bg-card border border-border rounded-xl h-full hover:shadow-lg transition-shadow overflow-hidden">
+              <div className="p-6">
+                <h3 className="text-3xl font-bold text-foreground mb-4">
                   Core Competencies
                 </h3>
-                <div className="space-y-6">
-                  {skills.map((skill, index) => (
-                    <motion.div
-                      key={skill.category}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.6 + index * 0.1 }}
-                      whileHover={{ x: 5 }}
-                    >
-                      <div className="flex items-start">
-                        <motion.div 
-                          className="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center mr-3 flex-shrink-0"
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                          transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                        >
-                          <skill.icon size={20} className="text-foreground" />
-                        </motion.div>
-                        <div>
-                          <h4 className="text-foreground font-semibold mb-2">
-                            {skill.category}
-                          </h4>
-                          <ul className="space-y-1">
-                            {skill.items.map((item) => (
-                              <li key={item} className="text-muted-foreground text-sm">
-                                • {item}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+              <div style={{ height: '500px', position: 'relative' }}>
+                <FlowingMenu items={skillsMenuItems} />
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
