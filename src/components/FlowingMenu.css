@@ -86,15 +86,17 @@
 }
 
 .marquee__img {
-  width: clamp(100px, 120px, 140px);
-  height: 5vh;
-  margin: 1em 1.2vw;
-  padding: 0.6em 0;
+  width: clamp(80px, 100px, 120px);
+  height: clamp(40px, 50px, 60px);
+  margin: 0.5em 1vw;
+  padding: 0.5em;
   border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
 }
 
 .menu__item:hover .marquee {

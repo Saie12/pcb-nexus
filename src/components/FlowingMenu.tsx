@@ -121,7 +121,13 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
         {skills.map((skill, skillIdx) => (
           <React.Fragment key={`${idx}-${skillIdx}`}>
             <span>{skill.name}</span>
-            <div className="marquee__img" style={{ backgroundImage: `url(${skill.logo})` }} />
+            <div 
+              className="marquee__img" 
+              style={{ backgroundImage: `url(${skill.logo})` }}
+              title={skill.name}
+              role="img"
+              aria-label={skill.name}
+            />
           </React.Fragment>
         ))}
       </React.Fragment>
