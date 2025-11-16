@@ -30,7 +30,8 @@ const skillData: Record<string, Array<{ name: string; logo: string }>> = {
   'EDA Tools': [
     { name: 'KiCad', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/59/KiCad-Logo.svg' },
     { name: 'Altium', logo: 'https://seeklogo.com/images/A/altium-logo-8C2E086C3E-seeklogo.com.png' },
-    { name: 'Eagle', logo: 'https://seeklogo.com/images/A/autodesk-eagle-logo-8B5B33E4F8-seeklogo.com.png' }
+    { name: 'Eagle', logo: 'https://seeklogo.com/images/A/autodesk-eagle-logo-8B5B33E4F8-seeklogo.com.png' },
+    { name: 'Proteus', logo: 'https://www.labcenter.com/images/proteus_icon.png' }
   ],
   'Design Concepts': [
     { name: 'High-Speed Design', logo: 'https://cdn-icons-png.flaticon.com/512/2920/2920235.png' },
