@@ -43,6 +43,40 @@ function RouteSyncer() {
   return null;
 }
 
+function AssetPreloader() {
+  const location = useLocation();
+  
+  useEffect(() => {
+    // Only start preloading after initial page is loaded
+    const preloadAssets = () => {
+      // Preload 3D models in the background
+      const models = ['/assets/High_Speed_Ethernet_Interface.glb'];
+      
+      // Use requestIdleCallback for non-blocking preload
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+          models.forEach((modelPath) => {
+            fetch(modelPath)
+              .then(() => console.log(`✅ Preloaded: ${modelPath}`))
+              .catch(() => console.warn(`⚠️ Failed to preload: ${modelPath}`));
+          });
+        }, { timeout: 2000 });
+      }
+    };
+
+    // Wait for page to be interactive before preloading
+    if (document.readyState === 'complete') {
+      setTimeout(preloadAssets, 1000);
+    } else {
+      window.addEventListener('load', () => {
+        setTimeout(preloadAssets, 1000);
+      });
+    }
+  }, [location.pathname]);
+
+  return null;
+}
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <InstrumentationProvider>
@@ -51,6 +85,7 @@ createRoot(document.getElementById("root")!).render(
       <ConvexAuthProvider client={convex}>
         <BrowserRouter>
           <RouteSyncer />
+          <AssetPreloader />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/services" element={<Services />} />
