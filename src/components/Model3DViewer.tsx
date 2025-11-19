@@ -10,9 +10,12 @@ interface Model3DViewerProps {
 }
 
 function Model({ modelPath }: { modelPath: string }) {
-  const { scene } = useGLTF(modelPath);
+  const { scene } = useGLTF(modelPath, true);
   return <primitive object={scene} />;
 }
+
+// Preload the model
+useGLTF.preload("/assets/High_Speed_Ethernet_Interface.glb");
 
 export default function Model3DViewer({ modelPath, className = "" }: Model3DViewerProps) {
   return (
