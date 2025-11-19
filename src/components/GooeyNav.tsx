@@ -116,6 +116,10 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     const liEl = e.currentTarget.parentElement;
     if (!liEl) return;
     
+    // Navigate immediately
+    navigate(href);
+
+    // Only run animation if not already active
     if (activeIndex === index) return;
 
     setActiveIndex(index);
@@ -135,11 +139,6 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     if (filterRef.current) {
       makeParticles(filterRef.current);
     }
-
-    // Navigate after animation completes
-    setTimeout(() => {
-      navigate(href);
-    }, 400);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>, index: number, href: string) => {
