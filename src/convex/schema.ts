@@ -56,6 +56,13 @@ const schema = defineSchema(
       message: v.string(),
       status: v.string(),
     }).index("by_status", ["status"]),
+
+    resumeDownloads: defineTable({
+      timestamp: v.number(),
+      source: v.string(), // "portfolio" or "direct"
+      userAgent: v.optional(v.string()),
+      referrer: v.optional(v.string()),
+    }),
   },
   {
     schemaValidation: false,

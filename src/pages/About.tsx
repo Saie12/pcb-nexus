@@ -4,8 +4,45 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
 import { Download, Code, Cpu, Zap, GitBranch } from "lucide-react";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { toast } from "sonner";
 
 export default function About() {
+  const logDownload = useMutation(api.resumeTracking.logDownload);
+
+  const handleResumeDownload = async () => {
+    try {
+      // Log download to Convex
+      await logDownload({
+        source: "portfolio",
+        userAgent: navigator.userAgent,
+        referrer: document.referrer || undefined,
+      });
+
+      // Track with Google Analytics
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "resume_download", {
+          event_category: "engagement",
+          event_label: "Resume Download from About Page",
+        });
+      }
+
+      // Trigger download
+      const link = document.createElement("a");
+      link.href = "/assets/Saiesh_Sasane_Resume.pdf"; // Update this filename when you upload your resume
+      link.download = "Saiesh_Sasane_Resume.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      toast.success("Resume download started!");
+    } catch (error) {
+      console.error("Error logging download:", error);
+      toast.error("Failed to download resume. Please try again.");
+    }
+  };
+
   const skills = [
     {
       category: "EDA Tools",
@@ -178,6 +215,7 @@ export default function About() {
                     whileTap={{ scale: 0.98 }}
                   >
                     <Button
+                      onClick={handleResumeDownload}
                       className="w-full mt-8 bg-[#00BFFF] text-white hover:bg-[#00BFFF]/90 shadow-[0_0_20px_rgba(0,191,255,0.3)] hover:shadow-[0_0_30px_rgba(0,191,255,0.5)] font-semibold transition-all duration-300"
                       size="lg"
                     >

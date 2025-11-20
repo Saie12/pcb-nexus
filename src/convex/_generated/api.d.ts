@@ -18,6 +18,7 @@ import type * as auth from "../auth.js";
 import type * as contact from "../contact.js";
 import type * as http from "../http.js";
 import type * as projects from "../projects.js";
+import type * as resumeTracking from "../resumeTracking.js";
 import type * as seedProjects from "../seedProjects.js";
 import type * as sendEmails from "../sendEmails.js";
 import type * as testContactData from "../testContactData.js";
@@ -38,6 +39,7 @@ declare const fullApi: ApiFromModules<{
   contact: typeof contact;
   http: typeof http;
   projects: typeof projects;
+  resumeTracking: typeof resumeTracking;
   seedProjects: typeof seedProjects;
   sendEmails: typeof sendEmails;
   testContactData: typeof testContactData;
