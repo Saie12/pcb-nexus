@@ -46,6 +46,7 @@ const schema = defineSchema(
       layoutImages: v.array(v.string()),
       githubUrl: v.optional(v.string()),
       demoUrl: v.optional(v.string()),
+      model3dPath: v.optional(v.string()),
       order: v.number(),
     }).index("by_slug", ["slug"]),
 

@@ -123,8 +123,8 @@ export default function ProjectDetail() {
               </div>
             </motion.div>
 
-            {/* 3D Model Viewer - Add this section for High Speed Ethernet Interface */}
-            {project.slug === "high-speed-ethernet-interface" && (
+            {/* 3D Model Viewer - Available for all projects with 3D models */}
+            {project.model3dPath && (
               <motion.div
                 className="mb-16"
                 initial={{ opacity: 0, y: 20 }}
@@ -157,7 +157,7 @@ export default function ProjectDetail() {
                     Explore the PCB design in full 3D - rotate, zoom, and inspect every detail
                   </motion.p>
                 </div>
-                <Model3DViewer modelPath="/assets/High_Speed_Ethernet_Interface.glb" />
+                <Model3DViewer modelPath={project.model3dPath} />
               </motion.div>
             )}
 
