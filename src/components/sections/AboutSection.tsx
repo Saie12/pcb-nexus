@@ -113,7 +113,7 @@ export default function AboutSection() {
                   Core Competencies
                 </h3>
               </div>
-              <div className="w-full" style={{ height: '600px', position: 'relative' }}>
+              <div className="w-full relative" style={{ height: '600px', minHeight: '400px' }}>
                 <FlowingMenu items={skillsMenuItems} />
               </div>
             </div>
