@@ -21,6 +21,7 @@ import type * as projects from "../projects.js";
 import type * as seedProjects from "../seedProjects.js";
 import type * as sendEmails from "../sendEmails.js";
 import type * as testContactData from "../testContactData.js";
+import type * as testContactWithEmail from "../testContactWithEmail.js";
 import type * as users from "../users.js";
 
 /**
@@ -40,6 +41,7 @@ declare const fullApi: ApiFromModules<{
   seedProjects: typeof seedProjects;
   sendEmails: typeof sendEmails;
   testContactData: typeof testContactData;
+  testContactWithEmail: typeof testContactWithEmail;
   users: typeof users;
 }>;
 export declare const api: FilterApi<
