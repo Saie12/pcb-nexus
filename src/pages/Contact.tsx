@@ -200,14 +200,14 @@ export default function Contact() {
                   </h3>
                   <div className="space-y-4">
                     <motion.a
-                      href="mailto:saieshsasane@gmail.com"
+                      href="mailto:saieshsasane.hireme@gmail.com"
                       className="flex items-center text-gray-400 hover:text-[#00BFFF] transition-colors group"
                       whileHover={{ x: 5 }}
                     >
                       <div className="w-10 h-10 bg-[#00BFFF]/10 border border-[#00BFFF]/20 rounded-lg flex items-center justify-center mr-3 group-hover:bg-[#00BFFF]/20 group-hover:shadow-[0_0_15px_rgba(0,191,255,0.3)] transition-all">
                         <Mail size={20} className="text-[#00BFFF]" />
                       </div>
-                      <span className="text-sm">saieshsasane@gmail.com</span>
+                      <span className="text-sm">saieshsasane.hireme@gmail.com</span>
                     </motion.a>
                   </div>
                 </CardContent>

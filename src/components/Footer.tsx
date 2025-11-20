@@ -44,7 +44,7 @@ export default function Footer() {
             <h3 className="text-lg font-semibold text-white mb-4">Connect</h3>
             <div className="flex space-x-4">
               <a
-                href="mailto:saieshsasane@gmail.com"
+                href="mailto:saieshsasane.hireme@gmail.com"
                 className="w-10 h-10 bg-[#111111] border border-[#00ff88]/20 rounded-lg flex items-center justify-center text-gray-400 hover:text-[#00ff88] hover:border-[#00ff88] hover:shadow-[0_0_15px_rgba(0,255,136,0.3)] transition-all"
               >
                 <Mail size={20} />
