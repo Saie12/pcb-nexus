@@ -1,1 +1,2 @@
-pnpm add resend
+   npx convex deploy
+   
