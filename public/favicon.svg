@@ -1,0 +1,44 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark background -->
+  <rect width="32" height="32" fill="#0a0a0a" rx="4"/>
+  
+  <!-- PCB trace pattern forming "S" -->
+  <!-- First S curve - top -->
+  <path d="M 8 10 L 12 10 L 12 8 L 20 8 L 20 10 L 24 10" 
+        stroke="#00ff88" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        fill="none"/>
+  
+  <!-- First S curve - middle -->
+  <path d="M 24 10 L 24 14 L 20 14 L 12 14 L 12 18 L 8 18" 
+        stroke="#00ff88" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        fill="none"/>
+  
+  <!-- First S curve - bottom -->
+  <path d="M 8 18 L 8 22 L 12 22 L 20 22 L 20 24 L 24 24" 
+        stroke="#00ff88" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        fill="none"/>
+  
+  <!-- PCB pads/vias at connection points -->
+  <circle cx="12" cy="10" r="1.5" fill="#00BFFF"/>
+  <circle cx="20" cy="10" r="1.5" fill="#00BFFF"/>
+  <circle cx="24" cy="14" r="1.5" fill="#ff0080"/>
+  <circle cx="12" cy="14" r="1.5" fill="#ff0080"/>
+  <circle cx="8" cy="18" r="1.5" fill="#00BFFF"/>
+  <circle cx="12" cy="22" r="1.5" fill="#00BFFF"/>
+  <circle cx="20" cy="22" r="1.5" fill="#00BFFF"/>
+  
+  <!-- Subtle glow effect -->
+  <path d="M 8 10 L 12 10 L 12 8 L 20 8 L 20 10 L 24 10 L 24 14 L 20 14 L 12 14 L 12 18 L 8 18 L 8 22 L 12 22 L 20 22 L 20 24 L 24 24" 
+        stroke="#00ff88" 
+        stroke-width="3" 
+        stroke-linecap="round" 
+        fill="none"
+        opacity="0.3"
+        filter="blur(2px)"/>
+</svg>
