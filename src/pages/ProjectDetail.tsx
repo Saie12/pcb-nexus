@@ -4,24 +4,15 @@ import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
 import { ArrowLeft, Github, ExternalLink, Loader2 } from "lucide-react";
 import { Link, useParams } from "react-router";
-import { useEffect } from "react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import Model3DViewer from "@/components/Model3DViewer";
-import { trackProjectView } from "@/lib/analytics";
 
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
   const projects = useQuery(api.projects.list);
   
   const project = projects?.find((p) => p.slug === slug);
-
-  // Track project view when project loads
-  useEffect(() => {
-    if (project) {
-      trackProjectView(project.title);
-    }
-  }, [project]);
 
   if (!projects) {
     return (

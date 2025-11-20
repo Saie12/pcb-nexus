@@ -10,7 +10,6 @@ import { useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
-import { trackContactFormSubmission } from "@/lib/analytics";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -29,10 +28,6 @@ export default function Contact() {
     try {
       await submitContact(formData);
       toast.success("Message sent successfully! I'll get back to you soon.");
-      
-      // Track successful contact form submission
-      trackContactFormSubmission();
-      
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
       toast.error("Failed to send message. Please try again.");

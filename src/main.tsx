@@ -17,7 +17,6 @@ import ProjectDetail from "./pages/ProjectDetail.tsx";
 import About from "./pages/About.tsx";
 import Contact from "./pages/Contact.tsx";
 import "./types/global.d.ts";
-import { initGA, trackPageView } from "@/lib/analytics.ts";
 
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
 
@@ -28,9 +27,6 @@ function RouteSyncer() {
       { type: "iframe-route-change", path: location.pathname },
       "*",
     );
-    
-    // Track page view in Google Analytics
-    trackPageView(location.pathname);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -106,6 +102,3 @@ createRoot(document.getElementById("root")!).render(
     </InstrumentationProvider>
   </StrictMode>,
 );
-
-// Initialize Google Analytics after app renders
-initGA();
