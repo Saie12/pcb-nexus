@@ -30,6 +30,15 @@ interface LightRaysProps {
 
 const DEFAULT_COLOR = '#ffffff';
 
+// Detect if device is touch-enabled
+const isTouchDevice = (): boolean => {
+  return (
+    'ontouchstart' in window ||
+    navigator.maxTouchPoints > 0 ||
+    (navigator as any).msMaxTouchPoints > 0
+  );
+};
+
 const hexToRgb = (hex: string): [number, number, number] => {
   const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return m ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255] : [1, 1, 1];
@@ -82,21 +91,32 @@ interface Uniforms {
   distortion: { value: number };
 }
 
-const LightRays: React.FC<LightRaysProps> = ({
-  raysOrigin = 'top-center',
-  raysColor = DEFAULT_COLOR,
-  raysSpeed = 1,
-  lightSpread = 1,
-  rayLength = 2,
-  pulsating = false,
-  fadeDistance = 1.0,
-  saturation = 1.0,
-  followMouse = true,
-  mouseInfluence = 0.1,
-  noiseAmount = 0.0,
-  distortion = 0.0,
-  className = ''
-}) => {
+const LightRays: React.FC<LightRaysProps> = (props) => {
+  const {
+    raysOrigin = 'top-center',
+    raysColor = DEFAULT_COLOR,
+    raysSpeed = 1,
+    lightSpread = 1,
+    rayLength = 2,
+    pulsating = false,
+    fadeDistance = 1.0,
+    saturation = 1.0,
+    followMouse = true,
+    mouseInfluence = 0.1,
+    noiseAmount = 0.0,
+    distortion = 0.0,
+    className = ''
+  } = props;
+
+  // Detect touch device and adjust settings
+  const isTouch = isTouchDevice();
+  const effectiveFollowMouse = followMouse && !isTouch;
+  const effectiveMouseInfluence = isTouch ? 0 : mouseInfluence;
+  
+  // Mobile optimizations
+  const effectiveRayLength = isTouch ? rayLength * 0.8 : rayLength;
+  const effectiveLightSpread = isTouch ? lightSpread * 1.2 : lightSpread;
+
   const containerRef = useRef<HTMLDivElement>(null);
   const uniformsRef = useRef<Uniforms | null>(null);
   const rendererRef = useRef<Renderer | null>(null);
@@ -144,8 +164,11 @@ const LightRays: React.FC<LightRaysProps> = ({
 
       if (!containerRef.current) return;
 
+      // Use lower DPR on mobile for better performance
+      const dpr = isTouch ? Math.min(window.devicePixelRatio, 1.5) : Math.min(window.devicePixelRatio, 2);
+
       const renderer = new Renderer({
-        dpr: Math.min(window.devicePixelRatio, 2),
+        dpr,
         alpha: true
       });
       rendererRef.current = renderer;
@@ -270,13 +293,13 @@ void main() {
 
         raysColor: { value: hexToRgb(raysColor) },
         raysSpeed: { value: raysSpeed },
-        lightSpread: { value: lightSpread },
-        rayLength: { value: rayLength },
+        lightSpread: { value: effectiveLightSpread },
+        rayLength: { value: effectiveRayLength },
         pulsating: { value: pulsating ? 1.0 : 0.0 },
         fadeDistance: { value: fadeDistance },
         saturation: { value: saturation },
         mousePos: { value: [0.5, 0.5] },
-        mouseInfluence: { value: mouseInfluence },
+        mouseInfluence: { value: effectiveMouseInfluence },
         noiseAmount: { value: noiseAmount },
         distortion: { value: distortion }
       };
@@ -294,7 +317,7 @@ void main() {
       const updatePlacement = () => {
         if (!containerRef.current || !renderer) return;
 
-        renderer.dpr = Math.min(window.devicePixelRatio, 2);
+        renderer.dpr = isTouch ? Math.min(window.devicePixelRatio, 1.5) : Math.min(window.devicePixelRatio, 2);
 
         const { clientWidth: wCSS, clientHeight: hCSS } = containerRef.current;
         renderer.setSize(wCSS, hCSS);
@@ -317,7 +340,7 @@ void main() {
 
         uniforms.iTime.value = t * 0.001;
 
-        if (followMouse && mouseInfluence > 0.0) {
+        if (effectiveFollowMouse && effectiveMouseInfluence > 0.0) {
           const smoothing = 0.92;
 
           smoothMouseRef.current.x = smoothMouseRef.current.x * smoothing + mouseRef.current.x * (1 - smoothing);
@@ -387,10 +410,13 @@ void main() {
     pulsating,
     fadeDistance,
     saturation,
-    followMouse,
-    mouseInfluence,
+    effectiveFollowMouse,
+    effectiveMouseInfluence,
     noiseAmount,
-    distortion
+    distortion,
+    effectiveRayLength,
+    effectiveLightSpread,
+    isTouch
   ]);
 
   useEffect(() => {
@@ -401,12 +427,12 @@ void main() {
 
     u.raysColor.value = hexToRgb(raysColor);
     u.raysSpeed.value = raysSpeed;
-    u.lightSpread.value = lightSpread;
-    u.rayLength.value = rayLength;
+    u.lightSpread.value = effectiveLightSpread;
+    u.rayLength.value = effectiveRayLength;
     u.pulsating.value = pulsating ? 1.0 : 0.0;
     u.fadeDistance.value = fadeDistance;
     u.saturation.value = saturation;
-    u.mouseInfluence.value = mouseInfluence;
+    u.mouseInfluence.value = effectiveMouseInfluence;
     u.noiseAmount.value = noiseAmount;
     u.distortion.value = distortion;
 
@@ -424,9 +450,11 @@ void main() {
     pulsating,
     fadeDistance,
     saturation,
-    mouseInfluence,
+    effectiveMouseInfluence,
     noiseAmount,
-    distortion
+    distortion,
+    effectiveRayLength,
+    effectiveLightSpread
   ]);
 
   useEffect(() => {
@@ -438,11 +466,11 @@ void main() {
       mouseRef.current = { x, y };
     };
 
-    if (followMouse) {
+    if (effectiveFollowMouse) {
       window.addEventListener('mousemove', handleMouseMove);
       return () => window.removeEventListener('mousemove', handleMouseMove);
     }
-  }, [followMouse]);
+  }, [effectiveFollowMouse]);
 
   return <div ref={containerRef} className={`light-rays-container ${className}`.trim()} />;
 };
