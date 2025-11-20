@@ -1,16 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import GooeyNav from "@/components/GooeyNav";
 import Dock from "@/components/Dock";
-import { Home, Briefcase, Settings, Mail, User } from "lucide-react";
+import { Home, Briefcase, Settings, Mail, User, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const location = useLocation();
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
   const [showDock, setShowDock] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const backgroundColor = useTransform(
     scrollY,
@@ -33,6 +34,13 @@ export default function Navbar() {
     });
     return () => unsubscribe();
   }, [scrollY]);
+
+  // Close mobile menu when dock appears
+  useEffect(() => {
+    if (showDock) {
+      setMobileMenuOpen(false);
+    }
+  }, [showDock]);
 
   const navItems = [
     { label: "Work", href: "/projects" },
@@ -126,8 +134,13 @@ export default function Navbar() {
             </div>
 
             <div className="md:hidden relative z-10">
-              <Button variant="ghost" size="sm">
-                Menu
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-white hover:bg-white/10"
+              >
+                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </Button>
             </div>
           </div>
@@ -141,6 +154,44 @@ export default function Navbar() {
           }}
         />
       </motion.nav>
+
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
+        {mobileMenuOpen && !showDock && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="fixed top-16 left-0 right-0 z-40 md:hidden"
+          >
+            <div className="bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-white/10 shadow-xl">
+              <div className="max-w-6xl mx-auto px-6 py-4">
+                <nav className="flex flex-col space-y-2">
+                  {navItems.map((item, index) => (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                        className={`px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors ${
+                          location.pathname === item.href ? "bg-white/10" : ""
+                        }`}
+                      >
+                        {item.label}
+                      </motion.div>
+                    </Link>
+                  ))}
+                </nav>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Dock - appears when scrolling down */}
       {showDock && (
