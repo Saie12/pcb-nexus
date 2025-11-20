@@ -16,7 +16,7 @@ export const sendContactNotification = internalAction({
 
     try {
       await resend.emails.send({
-        from: "PCB Nexus Contact <onboarding@resend.dev>",
+        from: "PCB Nexus Contact <noreply@yourdomain.com>",
         to: "saieshsasane@gmail.com",
         subject: `New Contact Form Submission: ${args.subject}`,
         html: `
