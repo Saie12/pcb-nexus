@@ -1,2 +1,1 @@
-   npx convex deploy
-   
+git push github development
