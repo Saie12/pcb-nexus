@@ -63,7 +63,7 @@ export const seed = mutation({
         title: "High-Speed Ethernet Interface",
         slug: "high-speed-ethernet-interface",
         summary: "6-layer PCB design for Gigabit Ethernet with STM32F746NGH6 and DP83867IRPAPT PHY, featuring advanced signal integrity techniques.",
-        heroImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop",
+        heroImage: "https://harmless-tapir-303.convex.cloud/api/storage/996933d0-bf85-4b21-851c-1c865881c026",
         featured: true,
         technologies: ["KiCad", "6-Layer PCB", "Gigabit Ethernet", "STM32F746NGH6", "DP83867IRPAPT", "Differential Pairs", "EMI/EMC", "RGMII", "C"],
         concept: "Designed a robust Gigabit Ethernet interface board using the STM32F746NGH6 microcontroller with integrated MAC and an external PHY (DP83867IRPAPT). The STM32F746NGH6 features an ARM Cortex-M7 core running at 216 MHz with Ethernet MAC supporting 10/100/1000 Mbps. The DP83867IRPAPT is a robust, low power, fully featured Physical Layer transceiver with integrated PMD sublayers to support 10BASE-Te, 100BASE-TX and 1000BASE-T Ethernet protocols. The goal was to create a reliable Gigabit Ethernet connection with proper EMI mitigation for industrial environments.",
