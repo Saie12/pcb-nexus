@@ -79,7 +79,7 @@ export default function Navbar() {
 
   const getActiveIndex = () => {
     const index = navItems.findIndex(item => item.href === location.pathname);
-    return index >= 0 ? index : 0;
+    return index >= 0 ? index : -1; // Return -1 when on home page or unmatched route
   };
 
   return (
