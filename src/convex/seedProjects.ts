@@ -33,7 +33,7 @@ export const seed = mutation({
           "https://harmless-tapir-303.convex.cloud/api/storage/212d2b11-28b4-4a24-b1ce-a68490113b1c"
         ],
         layoutImages: [],
-        githubUrl: "https://github.com/Saie12/KICAD-STM32-GPS-Tracker-Project/tree/main",
+        githubUrl: "https://github.com/Saie12/KICAD-STM32-GPS-Tracker-Project",
         order: 1,
       },
       {
