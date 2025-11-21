@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, Maximize2, RotateCcw, ZoomIn, ZoomOut } from "lucide-react";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 import { modelCache } from "@/hooks/usePreloadAssets";
 
 interface Model3DViewerProps {
@@ -12,10 +13,14 @@ interface Model3DViewerProps {
 }
 
 function Model({ modelPath }: { modelPath: string }) {
-  // Check cache first, otherwise load normally
+  // Check cache first, otherwise load normally with DRACO support
   const gltf = modelCache.has(modelPath) 
     ? modelCache.get(modelPath) 
-    : useLoader(GLTFLoader, modelPath);
+    : useLoader(GLTFLoader, modelPath, (loader) => {
+        const dracoLoader = new DRACOLoader();
+        dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+        loader.setDRACOLoader(dracoLoader);
+      });
   
   // Scale up the model significantly for better visibility
   return <primitive object={gltf.scene} scale={6} />;
