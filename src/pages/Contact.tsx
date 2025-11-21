@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import SEO from "@/components/SEO";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Github, Send, Loader2, Copy, ExternalLink } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
@@ -21,9 +21,27 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showEmailMenu, setShowEmailMenu] = useState(false);
+  const emailMenuRef = useRef<HTMLDivElement>(null);
   const submitContact = useMutation(api.contact.submit);
 
   const emailAddress = "saieshsasane.hireme@gmail.com";
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (emailMenuRef.current && !emailMenuRef.current.contains(event.target as Node)) {
+        setShowEmailMenu(false);
+      }
+    };
+
+    if (showEmailMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showEmailMenu]);
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -272,7 +290,7 @@ export default function Contact() {
                     Contact Information
                   </h3>
                   <div className="space-y-4">
-                    <div className="relative">
+                    <div className="relative" ref={emailMenuRef}>
                       <motion.button
                         onClick={handleEmailClick}
                         className="flex items-center text-gray-400 hover:text-[#00BFFF] transition-colors group w-full"
