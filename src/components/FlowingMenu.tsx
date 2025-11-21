@@ -70,7 +70,6 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
   const itemRef = React.useRef<HTMLDivElement>(null);
   const marqueeRef = React.useRef<HTMLDivElement>(null);
   const marqueeInnerRef = React.useRef<HTMLDivElement>(null);
-  const [isTapped, setIsTapped] = React.useState(false);
 
   const animationDefaults: gsap.TweenVars = { duration: 0.6, ease: 'expo' };
 
@@ -116,29 +115,6 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
     );
   };
 
-  // Handle touch/tap for mobile devices
-  const handleTouchStart = () => {
-    setIsTapped(true);
-    if (!marqueeRef.current || !marqueeInnerRef.current) return;
-    
-    const tl = gsap.timeline({ defaults: animationDefaults });
-    tl.set(marqueeRef.current, { y: '101%' }, 0)
-      .set(marqueeInnerRef.current, { y: '-101%' }, 0)
-      .to([marqueeRef.current, marqueeInnerRef.current], { y: '0%' }, 0);
-  };
-
-  const handleTouchEnd = () => {
-    // Keep the marquee visible for 2 seconds after tap
-    setTimeout(() => {
-      setIsTapped(false);
-      if (!marqueeRef.current || !marqueeInnerRef.current) return;
-      
-      const tl = gsap.timeline({ defaults: animationDefaults });
-      tl.to(marqueeRef.current, { y: '101%' }, 0)
-        .to(marqueeInnerRef.current, { y: '-101%' }, 0);
-    }, 2000);
-  };
-
   const repeatedMarqueeContent = React.useMemo(() => {
     const skills = skillData[text] || [];
     return Array.from({ length: 4 }).map((_, idx) => (
@@ -160,15 +136,8 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
   }, [text]);
 
   return (
-    <div className={`menu__item ${isTapped ? 'tapped' : ''}`} ref={itemRef}>
-      <a 
-        className="menu__item-link" 
-        href={link} 
-        onMouseEnter={handleMouseEnter} 
-        onMouseLeave={handleMouseLeave}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
+    <div className="menu__item" ref={itemRef}>
+      <a className="menu__item-link" href={link} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         {text}
       </a>
       <div className="marquee" ref={marqueeRef}>

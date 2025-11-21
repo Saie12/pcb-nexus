@@ -125,46 +125,16 @@
   /* Ensure proper stacking on mobile */
   .menu__item {
     touch-action: manipulation;
-    position: relative;
-    isolation: isolate;
   }
   
-  /* Add a solid background layer to prevent text bleed */
-  .menu__item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: hsl(var(--card));
-    z-index: 0;
-  }
-  
-  .menu__item-link {
-    position: relative;
-    z-index: 2;
-  }
-  
-  .marquee {
-    z-index: 3;
-  }
-  
-  /* Make tap effect work on touch devices - show marquee on tap */
-  .menu__item:active .marquee,
-  .menu__item.tapped .marquee {
+  /* Make hover effect work on touch devices */
+  .menu__item:active .marquee {
     transform: translate3d(0, 0%, 0);
     background: hsl(var(--foreground));
   }
   
-  .menu__item:active .menu__item-link,
-  .menu__item.tapped .menu__item-link {
+  .menu__item:active .menu__item-link {
     color: transparent;
-  }
-  
-  /* Keep marquee visible for a moment after tap */
-  .menu__item.tapped {
-    transition: all 0.3s ease;
   }
 }
 
