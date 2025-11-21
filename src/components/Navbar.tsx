@@ -30,7 +30,7 @@ export default function Navbar() {
   useEffect(() => {
     const unsubscribe = scrollY.onChange((latest) => {
       setIsScrolled(latest > 50);
-      setShowDock(latest > 200);
+      setShowDock(latest > 170);
     });
     return () => unsubscribe();
   }, [scrollY]);
