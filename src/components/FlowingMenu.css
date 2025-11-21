@@ -147,17 +147,24 @@
   }
   
   .marquee {
-    z-index: 1;
+    z-index: 3;
   }
   
-  /* Make hover effect work on touch devices */
-  .menu__item:active .marquee {
+  /* Make tap effect work on touch devices - show marquee on tap */
+  .menu__item:active .marquee,
+  .menu__item.tapped .marquee {
     transform: translate3d(0, 0%, 0);
     background: hsl(var(--foreground));
   }
   
-  .menu__item:active .menu__item-link {
+  .menu__item:active .menu__item-link,
+  .menu__item.tapped .menu__item-link {
     color: transparent;
+  }
+  
+  /* Keep marquee visible for a moment after tap */
+  .menu__item.tapped {
+    transition: all 0.3s ease;
   }
 }
 
