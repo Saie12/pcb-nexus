@@ -238,8 +238,8 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
-              <Card className="bg-[#111111] border-[#00ff88]/20 h-full hover:border-[#00BFFF] hover:shadow-[0_0_30px_rgba(0,191,255,0.2)] transition-all duration-300 relative z-10">
-                <CardContent className="p-6 sm:p-8 relative z-10 bg-[#111111]">
+              <Card className="bg-[#111111] border-[#00ff88]/20 h-full hover:border-[#00BFFF] hover:shadow-[0_0_30px_rgba(0,191,255,0.2)] transition-all duration-300 relative z-10 overflow-hidden">
+                <CardContent className="p-6 sm:p-8 relative z-20 bg-[#111111]">
                   <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
                     Core Competencies
                   </h2>
