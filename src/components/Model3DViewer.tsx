@@ -23,7 +23,7 @@ function Model({ modelPath }: { modelPath: string }) {
       });
   
   // Scale up the model significantly for better visibility
-  return <primitive object={gltf.scene} scale={6} />;
+  return <primitive object={gltf.scene} scale={8} />;
 }
 
 export default function Model3DViewer({ modelPath, className = "" }: Model3DViewerProps) {
@@ -62,7 +62,7 @@ export default function Model3DViewer({ modelPath, className = "" }: Model3DView
       <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/50 via-transparent to-transparent pointer-events-none z-10" />
 
       <Canvas
-        camera={{ position: [0, 0, 0.7], fov: 75 }}
+        camera={{ position: [0, 0, 0.5], fov: 60 }}
         style={{ background: "transparent" }}
         onCreated={() => {
           setLoadProgress(100);
@@ -90,8 +90,8 @@ export default function Model3DViewer({ modelPath, className = "" }: Model3DView
             enableRotate={true}
             enableDamping={true}
             dampingFactor={0.05}
-            minDistance={0.2}
-            maxDistance={2}
+            minDistance={0.15}
+            maxDistance={1.5}
             minPolarAngle={0}
             maxPolarAngle={Math.PI}
             rotateSpeed={0.8}
