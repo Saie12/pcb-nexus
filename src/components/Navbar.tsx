@@ -55,27 +55,42 @@ export default function Navbar() {
     {
       icon: <Home size={24} className="text-white" />,
       label: "Home",
-      onClick: () => navigate("/"),
+      onClick: () => {
+        navigate("/");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      },
     },
     {
       icon: <Briefcase size={24} className="text-white" />,
       label: "Work",
-      onClick: () => navigate("/projects"),
+      onClick: () => {
+        navigate("/projects");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      },
     },
     {
       icon: <Settings size={24} className="text-white" />,
       label: "Services",
-      onClick: () => navigate("/services"),
+      onClick: () => {
+        navigate("/services");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      },
     },
     {
       icon: <User size={24} className="text-white" />,
       label: "About",
-      onClick: () => navigate("/about"),
+      onClick: () => {
+        navigate("/about");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      },
     },
     {
       icon: <Mail size={24} className="text-white" />,
       label: "Contact",
-      onClick: () => navigate("/contact"),
+      onClick: () => {
+        navigate("/contact");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      },
     },
   ];
 
