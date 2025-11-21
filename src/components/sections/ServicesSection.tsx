@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 import Shuffle from "@/components/Shuffle";
+import LightRays from "@/components/LightRays";
 
 export default function ServicesSection() {
   return (
@@ -11,9 +12,27 @@ export default function ServicesSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6 }}
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30"
+      className="relative py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto">
+      {/* Background light rays */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <LightRays 
+          raysOrigin="top-center"
+          raysColor="#ffffff"
+          raysSpeed={0.8}
+          lightSpread={1.5}
+          rayLength={2.5}
+          pulsating={true}
+          fadeDistance={1.2}
+          saturation={1.2}
+          followMouse={true}
+          mouseInfluence={0.3}
+          noiseAmount={0.02}
+          distortion={0.05}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-center">
           <Shuffle text="What I Offer" />
         </h2>
