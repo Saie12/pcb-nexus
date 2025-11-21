@@ -71,7 +71,8 @@ export const seed = mutation({
         challenges: "The main challenge was meeting EMC requirements for Gigabit Ethernet in industrial environments. The DP83867IRPAPT PHY requires precise power supply sequencing and decoupling. I implemented a comprehensive EMI mitigation strategy including: ferrite beads on power lines, proper grounding with star topology, shielding on critical traces, and careful component placement to minimize loop areas. All high-speed RGMII signals were kept away from board edges and properly terminated. The STM32F746NGH6's RGMII interface timing requirements demanded careful trace length matching and impedance control to ensure reliable Gigabit operation.",
         schematicImage: "https://harmless-tapir-303.convex.cloud/api/storage/6a487f85-56cd-4b24-8655-db5be0addea6",
         pcbLayoutImages: [
-          "https://harmless-tapir-303.convex.cloud/api/storage/d9035d29-098b-440d-89dd-2d254fca6e34"
+          "https://harmless-tapir-303.convex.cloud/api/storage/d9035d29-098b-440d-89dd-2d254fca6e34",
+          "https://harmless-tapir-303.convex.cloud/api/storage/bbd8e92a-d6fd-4c5a-adbe-325ed85083a4"
         ],
         view3dImages: [
           "https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=600&h=400&fit=crop"
