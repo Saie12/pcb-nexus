@@ -15,7 +15,7 @@ export default function FeaturedProjectsSection() {
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-center">
             <Shuffle text="Featured Projects" />
           </h2>
-          <p className="text-gray-300 text-center max-w-2xl mx-auto">
+          <p className="text-gray-800 text-center max-w-2xl mx-auto">
             Explore my latest work in PCB design, embedded systems, and hardware
             prototyping
           </p>
