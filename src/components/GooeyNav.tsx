@@ -143,7 +143,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     // Navigate after a short delay to allow animation to start
     setTimeout(() => {
       navigate(href);
-    }, 200);
+    }, 230);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>, index: number, href: string) => {
