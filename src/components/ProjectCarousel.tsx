@@ -45,10 +45,10 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
           dragConstraints={{ left: -containerWidth, right: 0 }}
           dragElastic={0.1}
           dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
-          className="flex gap-8 pb-8"
+          className="flex gap-12 pb-8"
         >
           {projects.map((project) => (
-            <div key={project._id} className="min-w-[350px] md:min-w-[400px]">
+            <div key={project._id} className="min-w-[380px] md:min-w-[450px] px-4">
               <ProjectCard
                 title={project.title}
                 summary={project.summary}
