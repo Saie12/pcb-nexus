@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import GooeyNav from "@/components/GooeyNav";
@@ -49,31 +49,33 @@ export default function Navbar() {
     { label: "Contact", href: "/contact" },
   ];
 
+  const navigate = useNavigate();
+
   const dockItems = [
     {
       icon: <Home size={24} className="text-white" />,
       label: "Home",
-      onClick: () => window.location.href = "/",
+      onClick: () => navigate("/"),
     },
     {
       icon: <Briefcase size={24} className="text-white" />,
       label: "Work",
-      onClick: () => window.location.href = "/projects",
+      onClick: () => navigate("/projects"),
     },
     {
       icon: <Settings size={24} className="text-white" />,
       label: "Services",
-      onClick: () => window.location.href = "/services",
+      onClick: () => navigate("/services"),
     },
     {
       icon: <User size={24} className="text-white" />,
       label: "About",
-      onClick: () => window.location.href = "/about",
+      onClick: () => navigate("/about"),
     },
     {
       icon: <Mail size={24} className="text-white" />,
       label: "Contact",
-      onClick: () => window.location.href = "/contact",
+      onClick: () => navigate("/contact"),
     },
   ];
 
