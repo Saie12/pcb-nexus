@@ -21,14 +21,14 @@ export default function ProjectCard({
     <Link to={`/projects/${slug}`}>
       <CardContainer className="inter-var">
         <CardBody className="bg-[#111111] relative group/card dark:hover:shadow-2xl dark:hover:shadow-[#00ff88]/[0.1] border-[#00ff88]/20 hover:border-[#00ff88]/50 w-auto sm:w-[30rem] h-auto rounded-xl p-6 border transition-colors">
-          <CardItem translateZ="50" className="text-xl font-bold text-foreground mb-2">
+          <CardItem translateZ="50" className="text-xl font-bold text-white mb-2">
             {title}
           </CardItem>
           
           <CardItem
             as="p"
             translateZ="60"
-            className="text-muted-foreground text-sm mb-4 line-clamp-2"
+            className="text-gray-300 text-sm mb-4 line-clamp-2"
           >
             {summary}
           </CardItem>
@@ -47,7 +47,7 @@ export default function ProjectCard({
             {technologies.slice(0, 3).map((tech) => (
               <span
                 key={tech}
-                className="px-2 py-1 text-xs rounded bg-secondary text-secondary-foreground"
+                className="px-2 py-1 text-xs rounded bg-[#00ff88]/10 text-[#00ff88] border border-[#00ff88]/30"
               >
                 {tech}
               </span>
@@ -57,7 +57,7 @@ export default function ProjectCard({
           <CardItem
             translateZ={20}
             as="div"
-            className="flex items-center text-primary text-sm font-medium"
+            className="flex items-center text-[#00ff88] text-sm font-medium"
           >
             View Details
             <ArrowRight size={16} className="ml-1" />
