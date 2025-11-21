@@ -9,7 +9,7 @@ export default function FeaturedProjectsSection() {
   const featuredProjects = useQuery(api.projects.getFeatured);
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a]">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-center">
