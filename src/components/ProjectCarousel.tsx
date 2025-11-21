@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useMotionValue, useTransform, AnimatePresence, animate } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -36,15 +36,20 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
     setCurrentIndex((prev) => {
       const newIndex = prev - 1;
       
-      // Animate to previous card
+      // Animate to previous card with spring animation
       const offset = -(projects.length + newIndex) * cardWidth;
-      x.set(offset);
+      animate(x, offset, {
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+        duration: 0.5
+      });
 
       // If we went before the first card, seamlessly jump to the end
       if (newIndex < 0) {
         setTimeout(() => {
           x.set(-(projects.length + projects.length - 1) * cardWidth);
-        }, 300);
+        }, 500);
         return projects.length - 1;
       }
       
@@ -56,15 +61,20 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
     setCurrentIndex((prev) => {
       const newIndex = prev + 1;
       
-      // Animate to next card
+      // Animate to next card with spring animation
       const offset = -(projects.length + newIndex) * cardWidth;
-      x.set(offset);
+      animate(x, offset, {
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+        duration: 0.5
+      });
 
       // If we went past the last card, seamlessly jump to the start
       if (newIndex >= projects.length) {
         setTimeout(() => {
           x.set(-projects.length * cardWidth);
-        }, 300);
+        }, 500);
         return 0;
       }
       
