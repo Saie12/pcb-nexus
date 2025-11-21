@@ -18,7 +18,6 @@ interface ProjectCarouselProps {
 
 export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const x = useMotionValue(0);
 
@@ -26,52 +25,76 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
   const infiniteProjects = [...projects, ...projects, ...projects];
   const cardWidth = typeof window !== 'undefined' && window.innerWidth >= 768 ? 480 + 64 : 340 + 32; // card width + gap
 
-  useEffect(() => {
-    if (containerRef.current) {
-      const updateWidth = () => {
-        if (containerRef.current) {
-          setContainerWidth(containerRef.current.scrollWidth - containerRef.current.offsetWidth);
-        }
-      };
-      updateWidth();
-      window.addEventListener("resize", updateWidth);
-      return () => window.removeEventListener("resize", updateWidth);
-    }
-  }, [projects]);
-
   // Set initial position to middle set of projects
   useEffect(() => {
     const initialOffset = -projects.length * cardWidth;
     x.set(initialOffset);
+    setCurrentIndex(0);
   }, [projects.length, cardWidth]);
 
   const handlePrevious = () => {
-    const newIndex = currentIndex - 1;
-    setCurrentIndex(newIndex);
-    const offset = -(projects.length + newIndex) * cardWidth;
-    x.set(offset);
+    setCurrentIndex((prev) => {
+      const newIndex = prev - 1;
+      
+      // Animate to previous card
+      const offset = -(projects.length + newIndex) * cardWidth;
+      x.set(offset);
 
-    // Reset to end of middle set when reaching start
-    if (newIndex < 0) {
-      setTimeout(() => {
-        setCurrentIndex(projects.length - 1);
-        x.set(-(projects.length + projects.length - 1) * cardWidth);
-      }, 300);
-    }
+      // If we went before the first card, seamlessly jump to the end
+      if (newIndex < 0) {
+        setTimeout(() => {
+          x.set(-(projects.length + projects.length - 1) * cardWidth);
+        }, 300);
+        return projects.length - 1;
+      }
+      
+      return newIndex;
+    });
   };
 
   const handleNext = () => {
-    const newIndex = currentIndex + 1;
-    setCurrentIndex(newIndex);
-    const offset = -(projects.length + newIndex) * cardWidth;
-    x.set(offset);
+    setCurrentIndex((prev) => {
+      const newIndex = prev + 1;
+      
+      // Animate to next card
+      const offset = -(projects.length + newIndex) * cardWidth;
+      x.set(offset);
 
-    // Reset to start of middle set when reaching end
-    if (newIndex >= projects.length) {
+      // If we went past the last card, seamlessly jump to the start
+      if (newIndex >= projects.length) {
+        setTimeout(() => {
+          x.set(-projects.length * cardWidth);
+        }, 300);
+        return 0;
+      }
+      
+      return newIndex;
+    });
+  };
+
+  const handleDragEnd = () => {
+    const currentX = x.get();
+    const newIndex = Math.round(-currentX / cardWidth) - projects.length;
+    
+    // Snap to nearest card
+    const snappedOffset = -(projects.length + newIndex) * cardWidth;
+    x.set(snappedOffset);
+    
+    // Handle wrap around
+    if (newIndex < 0) {
       setTimeout(() => {
-        setCurrentIndex(0);
-        x.set(-projects.length * cardWidth);
+        const wrappedIndex = projects.length + newIndex;
+        x.set(-(projects.length + wrappedIndex) * cardWidth);
+        setCurrentIndex(wrappedIndex);
       }, 300);
+    } else if (newIndex >= projects.length) {
+      setTimeout(() => {
+        const wrappedIndex = newIndex - projects.length;
+        x.set(-(projects.length + wrappedIndex) * cardWidth);
+        setCurrentIndex(wrappedIndex);
+      }, 300);
+    } else {
+      setCurrentIndex(newIndex);
     }
   };
 
@@ -98,17 +121,15 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
 
       <motion.div
         ref={containerRef}
-        className="cursor-grab active:cursor-grabbing"
-        style={{ x }}
+        className="cursor-grab active:cursor-grabbing overflow-visible"
       >
         <motion.div
           drag="x"
-          dragConstraints={{ left: -containerWidth, right: 0 }}
-          dragElastic={0.1}
-          dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
+          dragConstraints={{ left: -Infinity, right: Infinity }}
+          dragElastic={0.05}
+          onDragEnd={handleDragEnd}
+          style={{ x }}
           className="flex gap-8 md:gap-16 pb-8"
-          animate={{ x: -(projects.length + currentIndex) * cardWidth }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
           {infiniteProjects.map((project, index) => (
             <div key={`${project._id}-${index}`} className="min-w-[340px] w-[340px] md:min-w-[480px] md:w-[480px] flex-shrink-0">
