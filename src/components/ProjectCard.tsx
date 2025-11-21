@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 
@@ -19,22 +19,31 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   return (
     <Link to={`/projects/${slug}`}>
-      <Card className="overflow-hidden cursor-pointer border border-border hover:border-primary/50 transition-colors">
-        <div className="relative h-48 overflow-hidden">
-          <img
-            src={image}
-            alt={title}
-            className="w-full h-full object-cover"
-          />
-        </div>
-        
-        <CardContent className="p-6">
-          <h3 className="text-xl font-bold text-foreground mb-2">
+      <CardContainer className="inter-var">
+        <CardBody className="bg-[#111111] relative group/card dark:hover:shadow-2xl dark:hover:shadow-[#00ff88]/[0.1] border-[#00ff88]/20 hover:border-[#00ff88]/50 w-auto sm:w-[30rem] h-auto rounded-xl p-6 border transition-colors">
+          <CardItem translateZ="50" className="text-xl font-bold text-foreground mb-2">
             {title}
-          </h3>
-          <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{summary}</p>
+          </CardItem>
           
-          <div className="flex flex-wrap gap-2 mb-4">
+          <CardItem
+            as="p"
+            translateZ="60"
+            className="text-muted-foreground text-sm mb-4 line-clamp-2"
+          >
+            {summary}
+          </CardItem>
+          
+          <CardItem translateZ="100" className="w-full mb-4">
+            <div className="relative h-48 overflow-hidden rounded-lg">
+              <img
+                src={image}
+                alt={title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </CardItem>
+          
+          <CardItem translateZ="50" className="flex flex-wrap gap-2 mb-4">
             {technologies.slice(0, 3).map((tech) => (
               <span
                 key={tech}
@@ -43,14 +52,18 @@ export default function ProjectCard({
                 {tech}
               </span>
             ))}
-          </div>
+          </CardItem>
           
-          <div className="flex items-center text-primary text-sm font-medium">
+          <CardItem
+            translateZ={20}
+            as="div"
+            className="flex items-center text-primary text-sm font-medium"
+          >
             View Details
             <ArrowRight size={16} className="ml-1" />
-          </div>
-        </CardContent>
-      </Card>
+          </CardItem>
+        </CardBody>
+      </CardContainer>
     </Link>
   );
 }
