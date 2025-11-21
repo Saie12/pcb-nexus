@@ -40,7 +40,7 @@ export default function Projects() {
               <p className="text-gray-400">No projects yet. Check back soon!</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {projects.map((project, index) => (
                 <motion.div
                   key={project._id}
@@ -48,14 +48,17 @@ export default function Projects() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
+                  className="flex justify-center"
                 >
-                  <ProjectCard
-                    title={project.title}
-                    summary={project.summary}
-                    image={project.heroImage}
-                    slug={project.slug}
-                    technologies={project.technologies}
-                  />
+                  <div className="w-full max-w-[480px]">
+                    <ProjectCard
+                      title={project.title}
+                      summary={project.summary}
+                      image={project.heroImage}
+                      slug={project.slug}
+                      technologies={project.technologies}
+                    />
+                  </div>
                 </motion.div>
               ))}
             </div>
