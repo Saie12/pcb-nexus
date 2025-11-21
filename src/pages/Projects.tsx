@@ -40,7 +40,7 @@ export default function Projects() {
               <p className="text-gray-400">No projects yet. Check back soon!</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
               {projects.map((project, index) => (
                 <motion.div
                   key={project._id}
