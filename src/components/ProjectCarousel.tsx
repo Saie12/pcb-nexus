@@ -34,7 +34,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
   }, [projects]);
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden max-w-full md:max-w-[1040px] mx-auto">
       <motion.div
         ref={containerRef}
         className="cursor-grab active:cursor-grabbing"
