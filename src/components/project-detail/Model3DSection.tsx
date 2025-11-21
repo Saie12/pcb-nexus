@@ -16,9 +16,9 @@ export default function Model3DSection({ slug }: Model3DSectionProps) {
 
   // Map project slugs to their respective 3D model files
   const modelPaths: Record<string, string> = {
-    "high-speed-ethernet-interface": "/assets/High_Speed_Ethernet_Interface.glb",
+    "high-speed-ethernet-interface": "/assets/High_Speed_Ethernet_Interface_1_.glb",
     "cellular-enabled-stm32-gps-asset-tracker": "/assets/STM32_GPS_Tracker_1_.glb",
-    "esp32-dual-relay-wifi-smart-switch": "/assets/High_Speed_Ethernet_Interface.glb" // placeholder
+    "esp32-dual-relay-wifi-smart-switch": "/assets/High_Speed_Ethernet_Interface_1_.glb" // placeholder
   };
 
   const modelPath = modelPaths[slug] || "/assets/High_Speed_Ethernet_Interface.glb";
