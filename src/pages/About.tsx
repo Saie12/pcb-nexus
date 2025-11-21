@@ -62,17 +62,30 @@ export default function About() {
         });
       }
 
-      // Trigger download
+      // Fetch the PDF as a blob to ensure proper download
+      const response = await fetch("/assets/Saiesh_Sasane_Embedded_Hardware_Engineer_Resume.pdf");
+      if (!response.ok) {
+        throw new Error("Failed to fetch resume");
+      }
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      
+      // Trigger download with blob URL
       const link = document.createElement("a");
-      link.href = "/assets/Saiesh_Sasane_Embedded_Hardware_Engineer_Resume.pdf";
+      link.href = url;
       link.download = "Saiesh_Sasane_Embedded_Hardware_Engineer_Resume.pdf";
+      link.setAttribute("type", "application/pdf");
       document.body.appendChild(link);
       link.click();
+      
+      // Cleanup
       document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
 
       toast.success("Resume download started!");
     } catch (error) {
-      console.error("Error logging download:", error);
+      console.error("Error downloading resume:", error);
       toast.error("Failed to download resume. Please try again.");
     }
   };
