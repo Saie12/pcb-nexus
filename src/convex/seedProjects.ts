@@ -69,6 +69,7 @@ export const seed = mutation({
         concept: "Designed a robust Ethernet interface board using the STM32F407 microcontroller with integrated MAC and an external PHY (LAN8720A). The goal was to create a reliable 100Mbps Ethernet connection with proper EMI mitigation for industrial environments.",
         layoutStrategy: "Implemented a 6-layer stack-up optimized for high-speed signals: Top Signal - GND - Signal - Power - GND - Bottom Signal. The Ethernet differential pairs (TX+/TX-, RX+/RX-) were routed as 100-ohm controlled impedance with matched lengths within 50 mils. Used ground plane cutouts strategically to control impedance and minimize crosstalk. The magnetics module was placed close to the RJ45 connector with proper isolation.",
         challenges: "The main challenge was meeting EMC requirements for industrial use. I implemented a comprehensive EMI mitigation strategy including: ferrite beads on power lines, proper grounding with star topology, shielding on critical traces, and careful component placement to minimize loop areas. All high-speed signals were kept away from board edges and properly terminated.",
+        schematicImage: "https://harmless-tapir-303.convex.cloud/api/storage/6a487f85-56cd-4b24-8655-db5be0addea6",
         pcbLayoutImages: [
           "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&h=400&fit=crop"
         ],
