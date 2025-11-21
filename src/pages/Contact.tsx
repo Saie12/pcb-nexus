@@ -220,7 +220,7 @@ export default function Contact() {
                   </h3>
                   <div className="space-y-3">
                     <motion.a
-                      href="https://github.com"
+                      href="https://github.com/Saie12"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center text-gray-400 hover:text-[#ff0080] transition-colors group"
