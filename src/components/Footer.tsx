@@ -50,7 +50,7 @@ export default function Footer() {
                 <Mail size={20} />
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/Saie12"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-[#111111] border border-[#ff0080]/20 rounded-lg flex items-center justify-center text-gray-400 hover:text-[#ff0080] hover:border-[#ff0080] hover:shadow-[0_0_15px_rgba(255,0,128,0.3)] transition-all"
