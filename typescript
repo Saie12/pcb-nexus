@@ -1,7 +1,8 @@
-<motion.div
-  drag
-  dragConstraints={{ left: -100, right: 100, top: -50, bottom: 50 }}
-  dragElastic={0.2}
-  whileDrag={{ scale: 1.05, cursor: "grabbing" }}
-  className="cursor-grab"
->
+// User visits homepage
+// Browser downloads: Only Home page code
+// Total: 200 KB downloaded
+
+// User clicks "Projects" → Browser downloads Projects page (300 KB)
+// User views 3D model → Browser downloads 3D Viewer + GLB file (3 MB)
+
+const Model3DViewer = lazy(() => import("@/components/Model3DViewer"));

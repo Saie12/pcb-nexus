@@ -97,7 +97,7 @@ export default function Navbar() {
             [0, 100],
             ["0 0 0 0 rgba(0, 0, 0, 0)", "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)"]
           ),
-          opacity: useTransform(scrollY, [180, 220], [1, 0]),
+          opacity: useTransform(scrollY, [150, 250], [1, 0]),
           pointerEvents: showDock ? "none" : "auto",
         }}
       >
