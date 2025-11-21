@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import { Download, Code, Cpu, Zap, GitBranch } from "lucide-react";
 import { useMutation } from "convex/react";
@@ -10,6 +11,39 @@ import { toast } from "sonner";
 
 export default function About() {
   const logDownload = useMutation(api.resumeTracking.logDownload);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Saiesh Sasane",
+    "jobTitle": "PCB Design & Embedded Systems Engineer",
+    "description": "Passionate electronics engineer specializing in PCB design, embedded systems programming, and hardware prototyping with expertise in KiCad, ARM Cortex-M, and high-speed digital design.",
+    "knowsAbout": [
+      "KiCad",
+      "PCB Design",
+      "Schematic Capture",
+      "High-Speed Design",
+      "Impedance Control",
+      "EMI/EMC",
+      "DFM",
+      "ARM Cortex-M",
+      "PIC Microcontrollers",
+      "8051",
+      "C Programming",
+      "C++ Programming",
+      "Python",
+      "Git",
+      "GitHub",
+      "SPICE Simulation",
+      "Soldering"
+    ],
+    "alumniOf": "Electronics Engineering",
+    "hasOccupation": {
+      "@type": "Occupation",
+      "name": "PCB Design Engineer",
+      "skills": "PCB Layout, Embedded Firmware, Hardware Prototyping, High-Speed Design"
+    }
+  };
 
   const handleResumeDownload = async () => {
     try {
@@ -82,6 +116,44 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
+      <SEO
+        title="About - Saiesh Sasane | PCB Design & Embedded Systems Engineer"
+        description="Learn about Saiesh Sasane, a passionate electronics engineer with expertise in PCB design, embedded systems, KiCad, ARM Cortex-M, high-speed design, firmware development, and hardware prototyping. Download resume and view core competencies in EDA tools, microcontrollers, and circuit design."
+        keywords={[
+          "Saiesh Sasane about",
+          "Saiesh Sasane bio",
+          "Saiesh Sasane resume",
+          "Saiesh Sasane CV",
+          "PCB design engineer bio",
+          "embedded systems engineer about",
+          "hardware engineer profile",
+          "electronics engineer background",
+          "KiCad expert profile",
+          "ARM Cortex-M developer",
+          "high-speed design engineer",
+          "firmware developer profile",
+          "circuit design engineer",
+          "PCB layout specialist",
+          "hardware prototyping expert",
+          "electronics engineering skills",
+          "PCB design skills",
+          "embedded programming skills",
+          "microcontroller expertise",
+          "EDA tools experience",
+          "schematic capture skills",
+          "impedance control expertise",
+          "signal integrity knowledge",
+          "DFM experience",
+          "EMI EMC knowledge",
+          "soldering skills",
+          "hardware testing experience",
+          "Git version control",
+          "GitHub hardware projects",
+          "SPICE simulation skills",
+          "lab equipment experience"
+        ]}
+        structuredData={structuredData}
+      />
       <Navbar />
 
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">

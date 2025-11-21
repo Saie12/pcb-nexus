@@ -1,10 +1,60 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import { CheckCircle, Cpu, Code, Zap, Wrench } from "lucide-react";
 
 export default function Services() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "PCB Design & Embedded Systems Engineering",
+    "provider": {
+      "@type": "Person",
+      "name": "Saiesh Sasane"
+    },
+    "areaServed": "Worldwide",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Hardware Engineering Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Schematic & PCB Layout Design",
+            "description": "Professional multi-layer PCB layouts in KiCad with DFM principles"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "High-Speed PCB Design",
+            "description": "Controlled impedance, differential pairs, and signal integrity"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Firmware Development",
+            "description": "Embedded C/C++ firmware for PIC, 8051, and ARM microcontrollers"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Hardware Prototyping & Board Bring-up",
+            "description": "Assembly, soldering, and functional testing"
+          }
+        }
+      ]
+    }
+  };
+
   const services = [
     {
       icon: Cpu,
@@ -55,6 +105,56 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
+      <SEO
+        title="Services - PCB Design & Embedded Systems Engineering"
+        description="Professional PCB design and embedded systems engineering services by Saiesh Sasane. Offering schematic design, multi-layer PCB layout, high-speed design, firmware development, hardware prototyping, and board bring-up. Expert in KiCad, impedance control, signal integrity, and DFM."
+        keywords={[
+          "PCB design services",
+          "embedded systems services",
+          "hardware engineering services",
+          "KiCad design services",
+          "schematic design service",
+          "PCB layout service",
+          "high-speed PCB design service",
+          "firmware development service",
+          "embedded firmware service",
+          "hardware prototyping service",
+          "board bring-up service",
+          "circuit board design service",
+          "freelance PCB designer",
+          "contract hardware engineer",
+          "PCB consultant",
+          "electronics design service",
+          "Gerber file generation",
+          "BOM creation",
+          "pick and place files",
+          "3D PCB modeling",
+          "impedance control design",
+          "differential pair routing",
+          "signal integrity analysis",
+          "DFM design for manufacturing",
+          "multi-layer PCB service",
+          "4-layer PCB design",
+          "6-layer PCB design",
+          "USB interface design",
+          "Ethernet PCB design",
+          "power supply design service",
+          "ARM firmware development",
+          "STM32 programming",
+          "ESP32 development",
+          "PIC programming",
+          "8051 programming",
+          "C firmware development",
+          "C++ embedded programming",
+          "SMD soldering service",
+          "THT assembly",
+          "prototype assembly",
+          "hardware testing service",
+          "PCB debugging",
+          "circuit troubleshooting"
+        ]}
+        structuredData={structuredData}
+      />
       <Navbar />
 
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">

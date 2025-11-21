@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ProjectCard from "@/components/ProjectCard";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
@@ -9,8 +10,55 @@ import { Loader2 } from "lucide-react";
 export default function Projects() {
   const projects = useQuery(api.projects.list);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "PCB Design & Embedded Systems Projects",
+    "description": "Portfolio of PCB design projects, embedded systems, and hardware prototypes by Saiesh Sasane",
+    "author": {
+      "@type": "Person",
+      "name": "Saiesh Sasane"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
+      <SEO
+        title="Projects - PCB Design & Embedded Systems Portfolio"
+        description="Explore Saiesh Sasane's portfolio of PCB design projects including high-speed Ethernet interfaces, ESP32 WiFi smart switches, STM32 GPS trackers, IoT devices, and embedded systems. View schematics, PCB layouts, 3D models, and firmware code."
+        keywords={[
+          "PCB design portfolio",
+          "embedded systems projects",
+          "hardware projects",
+          "KiCad projects",
+          "high-speed PCB",
+          "Ethernet interface design",
+          "ESP32 projects",
+          "STM32 projects",
+          "GPS tracker hardware",
+          "WiFi smart switch",
+          "IoT device design",
+          "circuit board examples",
+          "PCB layout examples",
+          "schematic examples",
+          "hardware prototypes",
+          "electronics portfolio",
+          "6-layer PCB",
+          "4-layer PCB",
+          "multi-layer board",
+          "impedance controlled PCB",
+          "differential pair routing",
+          "USB interface design",
+          "power supply design examples",
+          "sensor integration projects",
+          "wireless hardware projects",
+          "cellular IoT",
+          "home automation hardware",
+          "relay control circuit",
+          "microcontroller projects"
+        ]}
+        structuredData={structuredData}
+      />
       <Navbar />
 
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">

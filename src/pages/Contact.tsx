@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import SEO from "@/components/SEO";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Github, Send, Loader2, Copy, ExternalLink } from "lucide-react";
 import { useState } from "react";
@@ -23,6 +24,19 @@ export default function Contact() {
   const submitContact = useMutation(api.contact.submit);
 
   const emailAddress = "saieshsasane.hireme@gmail.com";
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Saiesh Sasane",
+    "description": "Get in touch with Saiesh Sasane for PCB design projects, embedded systems development, hardware consulting, or job opportunities.",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Saiesh Sasane",
+      "email": "saieshsasane.hireme@gmail.com",
+      "jobTitle": "PCB Design & Embedded Systems Engineer"
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,6 +88,36 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
+      <SEO
+        title="Contact - Get in Touch for PCB Design & Embedded Systems Projects"
+        description="Contact Saiesh Sasane for PCB design services, embedded systems development, firmware programming, hardware prototyping, or job opportunities. Available for freelance projects, consulting, and full-time positions in hardware engineering."
+        keywords={[
+          "contact PCB designer",
+          "hire PCB design engineer",
+          "embedded systems consultant",
+          "hardware engineer contact",
+          "PCB design services inquiry",
+          "firmware development contact",
+          "hardware prototyping inquiry",
+          "freelance PCB designer",
+          "contract hardware engineer",
+          "PCB design quote",
+          "embedded systems quote",
+          "hardware consulting",
+          "PCB design job inquiry",
+          "hardware engineer hiring",
+          "electronics engineer contact",
+          "KiCad designer for hire",
+          "ARM firmware developer",
+          "circuit design services",
+          "board layout services",
+          "hardware project inquiry",
+          "electronics project consultation",
+          "PCB design collaboration",
+          "embedded systems collaboration"
+        ]}
+        structuredData={structuredData}
+      />
       <Navbar />
 
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
