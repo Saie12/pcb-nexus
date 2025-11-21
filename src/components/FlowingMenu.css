@@ -125,6 +125,29 @@
   /* Ensure proper stacking on mobile */
   .menu__item {
     touch-action: manipulation;
+    position: relative;
+    isolation: isolate;
+  }
+  
+  /* Add a solid background layer to prevent text bleed */
+  .menu__item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: hsl(var(--card));
+    z-index: 0;
+  }
+  
+  .menu__item-link {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .marquee {
+    z-index: 1;
   }
   
   /* Make hover effect work on touch devices */
