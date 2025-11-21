@@ -58,6 +58,25 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
+# Emerging AI Search & Agentic Browsers (2025)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: iAskBot
+Allow: /
+
+User-agent: Timpibot
+Allow: /
+
+User-agent: Kangaroo Bot
+Allow: /
+
 # Sitemap location
 Sitemap: https://saaieshh-s.vercel.app/sitemap.xml
 
