@@ -9,24 +9,24 @@ export default function FeaturedProjectsSection() {
   const featuredProjects = useQuery(api.projects.getFeatured);
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+    <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-background">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-center">
+        <div className="mb-8 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4 text-center">
             <Shuffle text="Featured Projects" />
           </h2>
-          <p className="text-black text-center max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-black text-center max-w-2xl mx-auto px-4">
             Explore my latest work in PCB design, embedded systems, and hardware
             prototyping
           </p>
         </div>
 
         {!featuredProjects ? (
-          <div className="flex justify-center py-20">
-            <Loader2 className="w-8 h-8 animate-spin text-foreground" />
+          <div className="flex justify-center py-12 sm:py-20">
+            <Loader2 className="w-6 h-6 sm:w-8 sm:h-8 animate-spin text-foreground" />
           </div>
         ) : featuredProjects.length === 0 ? (
-          <div className="text-center py-20">
+          <div className="text-center py-12 sm:py-20">
             <p className="text-muted-foreground">No featured projects yet. Check back soon!</p>
           </div>
         ) : (

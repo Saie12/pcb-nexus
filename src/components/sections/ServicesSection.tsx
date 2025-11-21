@@ -12,7 +12,7 @@ export default function ServicesSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6 }}
-      className="relative py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30 overflow-hidden"
+      className="relative py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30 overflow-hidden"
     >
       {/* Background light rays */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -33,11 +33,11 @@ export default function ServicesSection() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-center">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4 text-center">
           <Shuffle text="What I Offer" />
         </h2>
         <motion.p 
-          className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto"
+          className="text-sm sm:text-base text-muted-foreground text-center mb-8 sm:mb-12 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -46,7 +46,7 @@ export default function ServicesSection() {
           Professional hardware design services from concept to production
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {[
             {
               title: "Schematic & PCB Layout",
@@ -76,19 +76,19 @@ export default function ServicesSection() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
               whileHover={{ y: -10, scale: 1.02 }}
-              className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-all duration-300 group cursor-pointer"
+              className="bg-card border border-border rounded-xl p-5 sm:p-6 hover:shadow-lg transition-all duration-300 group cursor-pointer"
             >
               <motion.div
-                className="text-4xl mb-4"
+                className="text-3xl sm:text-4xl mb-3 sm:mb-4"
                 whileHover={{ scale: 1.2, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 {service.icon}
               </motion.div>
-              <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 sm:mb-3 group-hover:text-primary transition-colors">
                 {service.title}
               </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
                 {service.description}
               </p>
             </motion.div>
@@ -96,7 +96,7 @@ export default function ServicesSection() {
         </div>
 
         <motion.div 
-          className="text-center mt-12"
+          className="text-center mt-8 sm:mt-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

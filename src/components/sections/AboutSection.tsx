@@ -43,14 +43,14 @@ export default function AboutSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6 }}
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-background"
+      className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-background"
     >
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-center">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4 text-center">
           <Shuffle text="About Me" />
         </h2>
         <motion.p 
-          className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto"
+          className="text-sm sm:text-base text-muted-foreground text-center mb-8 sm:mb-12 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -59,7 +59,7 @@ export default function AboutSection() {
           Passionate about turning innovative ideas into functional hardware
         </motion.p>
 
-        <div className="grid grid-cols-1 gap-8">
+        <div className="grid grid-cols-1 gap-6 sm:gap-8">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -67,11 +67,11 @@ export default function AboutSection() {
             transition={{ delay: 0.2 }}
           >
             <Card className="bg-card border-border h-full hover:shadow-lg transition-shadow">
-              <CardContent className="p-8">
-                <h3 className="text-3xl font-bold text-foreground mb-6">
+              <CardContent className="p-6 sm:p-8">
+                <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 sm:mb-6">
                   Personal Bio
                 </h3>
-                <div className="space-y-4 text-muted-foreground">
+                <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-muted-foreground">
                   <motion.p
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -108,12 +108,12 @@ export default function AboutSection() {
             transition={{ delay: 0.4 }}
           >
             <div className="bg-card border border-border rounded-xl hover:shadow-lg transition-shadow overflow-hidden">
-              <div className="p-6 pb-4">
-                <h3 className="text-3xl font-bold text-foreground mb-2">
+              <div className="p-4 sm:p-6 pb-3 sm:pb-4">
+                <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
                   Core Competencies
                 </h3>
               </div>
-              <div className="w-full relative" style={{ height: '600px', minHeight: '400px' }}>
+              <div className="w-full relative" style={{ height: '400px', minHeight: '350px' }}>
                 <FlowingMenu items={skillsMenuItems} />
               </div>
             </div>
