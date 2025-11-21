@@ -79,7 +79,7 @@ export const seed = mutation({
           "https://harmless-tapir-303.convex.cloud/api/storage/b2e78c57-7a52-4da3-a909-223c34e3db8a"
         ],
         layoutImages: [],
-        githubUrl: "https://github.com",
+        githubUrl: "https://github.com/Saie12/KiCAD-Gigabit-Ethernet-Interface-Project",
         order: 3,
       },
     ];
