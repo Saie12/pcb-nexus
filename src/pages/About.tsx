@@ -62,17 +62,8 @@ export default function About() {
         });
       }
 
-      // Direct download approach - more reliable across browsers
-      const link = document.createElement("a");
-      link.href = "/assets/Saiesh_Sasane_Embedded_Hardware_Engineer_Resume.pdf";
-      link.download = "Saiesh_Sasane_Embedded_Hardware_Engineer_Resume.pdf";
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      
-      // Append to body, click, and remove
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      // Simple direct navigation approach - most reliable
+      window.location.href = "/assets/Saiesh_Sasane_Embedded_Hardware_Engineer_Resume.pdf";
 
       toast.success("Resume download started!");
     } catch (error) {
