@@ -1,49 +1,12 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import SEO from "@/components/SEO";
-import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Github, Send, Loader2, Copy, ExternalLink, Code2, Star, GitFork } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
-import { useMutation } from "convex/react";
-import { api } from "@/convex/_generated/api";
-import { toast } from "sonner";
+import ContactForm from "@/components/contact/ContactForm";
+import ContactInfo from "@/components/contact/ContactInfo";
+import SocialLinks from "@/components/contact/SocialLinks";
+import { motion } from "framer-motion";
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showEmailMenu, setShowEmailMenu] = useState(false);
-  const emailMenuRef = useRef<HTMLDivElement>(null);
-  const submitContact = useMutation(api.contact.submit);
-
-  const emailAddress = "saieshsasane.hireme@gmail.com";
-
-  // Close menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (emailMenuRef.current && !emailMenuRef.current.contains(event.target as Node)) {
-        setShowEmailMenu(false);
-      }
-    };
-
-    if (showEmailMenu) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [showEmailMenu]);
-
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
@@ -55,54 +18,6 @@ export default function Contact() {
       "email": "saieshsasane.hireme@gmail.com",
       "jobTitle": "PCB Design & Embedded Systems Engineer"
     }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      await submitContact(formData);
-      toast.success("Message sent successfully! I'll get back to you soon.");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch (error) {
-      toast.error("Failed to send message. Please try again.");
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleEmailClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setShowEmailMenu(!showEmailMenu);
-  };
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(emailAddress);
-    toast.success("Email address copied to clipboard!");
-    setShowEmailMenu(false);
-  };
-
-  const handleOpenGmail = () => {
-    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}`, "_blank");
-    setShowEmailMenu(false);
-  };
-
-  const handleOpenOutlook = () => {
-    window.open(`https://outlook.live.com/mail/0/deeplink/compose?to=${emailAddress}`, "_blank");
-    setShowEmailMenu(false);
-  };
-
-  const handleOpenDefault = () => {
-    window.location.href = `mailto:${emailAddress}`;
-    setShowEmailMenu(false);
   };
 
   return (
@@ -167,117 +82,7 @@ export default function Contact() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="lg:col-span-2"
-            >
-              <Card className="bg-[#111111] border-[#00ff88]/20 hover:border-[#00BFFF] hover:shadow-[0_0_30px_rgba(0,191,255,0.2)] transition-all duration-300">
-                <CardContent className="p-6 sm:p-8">
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                      >
-                        <label className="text-white font-medium mb-2 block">
-                          Name
-                        </label>
-                        <Input
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          placeholder="Your name"
-                          required
-                          className="bg-[#0a0a0a] border-[#00ff88]/20 text-white focus:border-[#00BFFF] transition-colors"
-                        />
-                      </motion.div>
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
-                      >
-                        <label className="text-white font-medium mb-2 block">
-                          Email
-                        </label>
-                        <Input
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          placeholder="your.email@example.com"
-                          required
-                          className="bg-[#0a0a0a] border-[#00ff88]/20 text-white focus:border-[#00BFFF] transition-colors"
-                        />
-                      </motion.div>
-                    </div>
-
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.5 }}
-                    >
-                      <label className="text-white font-medium mb-2 block">
-                        Subject
-                      </label>
-                      <Input
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        placeholder="What's this about?"
-                        required
-                        className="bg-[#0a0a0a] border-[#00ff88]/20 text-white focus:border-[#00BFFF] transition-colors"
-                      />
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.6 }}
-                    >
-                      <label className="text-white font-medium mb-2 block">
-                        Message
-                      </label>
-                      <Textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Tell me about your project or opportunity..."
-                        required
-                        rows={6}
-                        className="bg-[#0a0a0a] border-[#00ff88]/20 text-white focus:border-[#00BFFF] transition-colors resize-none"
-                      />
-                    </motion.div>
-
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <Button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full bg-[#00BFFF] text-white hover:bg-[#00BFFF]/90 shadow-[0_0_20px_rgba(0,191,255,0.3)] hover:shadow-[0_0_30px_rgba(0,191,255,0.5)] font-semibold transition-all duration-300"
-                        size="lg"
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <Loader2 className="mr-2 animate-spin" size={20} />
-                            Sending...
-                          </>
-                        ) : (
-                          <>
-                            <Send className="mr-2" size={20} />
-                            Send Message
-                          </>
-                        )}
-                      </Button>
-                    </motion.div>
-                  </form>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <ContactForm />
 
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -285,130 +90,8 @@ export default function Contact() {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="space-y-6"
             >
-              <Card className="bg-[#111111] border-[#00ff88]/20 hover:border-[#00BFFF] hover:shadow-[0_0_30px_rgba(0,191,255,0.2)] transition-all duration-300">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-4">
-                    Contact Information
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="relative" ref={emailMenuRef}>
-                      <motion.button
-                        onClick={handleEmailClick}
-                        className="flex items-center text-gray-400 hover:text-[#00BFFF] transition-colors group w-full"
-                        whileHover={{ x: 5 }}
-                      >
-                        <div className="w-10 h-10 bg-[#00BFFF]/10 border border-[#00BFFF]/20 rounded-lg flex items-center justify-center mr-3 group-hover:bg-[#00BFFF]/20 group-hover:shadow-[0_0_15px_rgba(0,191,255,0.3)] transition-all">
-                          <Mail size={20} className="text-[#00BFFF]" />
-                        </div>
-                        <span className="text-sm break-all">{emailAddress}</span>
-                      </motion.button>
-
-                      <AnimatePresence>
-                        {showEmailMenu && (
-                          <motion.div
-                            initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                            transition={{ duration: 0.2 }}
-                            className="absolute top-full left-0 right-0 mt-2 bg-[#1a1a1a] border border-[#00BFFF]/30 rounded-lg shadow-[0_0_20px_rgba(0,191,255,0.2)] overflow-hidden z-10"
-                          >
-                            <button
-                              onClick={handleCopyEmail}
-                              className="w-full px-4 py-3 text-left text-sm text-gray-300 hover:bg-[#00BFFF]/10 hover:text-[#00BFFF] transition-colors flex items-center gap-2"
-                            >
-                              <Copy size={16} />
-                              Copy Email Address
-                            </button>
-                            <button
-                              onClick={handleOpenGmail}
-                              className="w-full px-4 py-3 text-left text-sm text-gray-300 hover:bg-[#00BFFF]/10 hover:text-[#00BFFF] transition-colors flex items-center gap-2"
-                            >
-                              <ExternalLink size={16} />
-                              Open in Gmail
-                            </button>
-                            <button
-                              onClick={handleOpenOutlook}
-                              className="w-full px-4 py-3 text-left text-sm text-gray-300 hover:bg-[#00BFFF]/10 hover:text-[#00BFFF] transition-colors flex items-center gap-2"
-                            >
-                              <ExternalLink size={16} />
-                              Open in Outlook
-                            </button>
-                            <button
-                              onClick={handleOpenDefault}
-                              className="w-full px-4 py-3 text-left text-sm text-gray-300 hover:bg-[#00BFFF]/10 hover:text-[#00BFFF] transition-colors flex items-center gap-2"
-                            >
-                              <Mail size={16} />
-                              Use Default Email Client
-                            </button>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-[#111111] border-[#00ff88]/20 hover:border-[#00BFFF] hover:shadow-[0_0_30px_rgba(0,191,255,0.2)] transition-all duration-300">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-4">
-                    Connect With Me
-                  </h3>
-                  <div className="space-y-3">
-                    <HoverCard openDelay={200}>
-                      <HoverCardTrigger asChild>
-                        <motion.a
-                          href="https://github.com/Saie12"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center text-gray-400 hover:text-[#ff0080] transition-colors group"
-                          whileHover={{ x: 5 }}
-                        >
-                          <div className="w-10 h-10 bg-[#ff0080]/10 border border-[#ff0080]/20 rounded-lg flex items-center justify-center mr-3 group-hover:bg-[#ff0080]/20 group-hover:shadow-[0_0_15px_rgba(255,0,128,0.3)] transition-all">
-                            <Github size={20} className="text-[#ff0080]" />
-                          </div>
-                          <span className="text-sm">GitHub Profile</span>
-                        </motion.a>
-                      </HoverCardTrigger>
-                      <HoverCardContent 
-                        className="w-80 bg-[#1a1a1a] border-[#ff0080]/30 cursor-pointer hover:bg-[#1a1a1a]/90 transition-colors"
-                        onClick={() => window.open("https://github.com/Saie12", "_blank")}
-                      >
-                        <div className="space-y-3">
-                          <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 bg-[#ff0080]/10 border border-[#ff0080]/20 rounded-lg flex items-center justify-center">
-                              <Github size={24} className="text-[#ff0080]" />
-                            </div>
-                            <div>
-                              <h4 className="text-white font-semibold">@Saie12</h4>
-                              <p className="text-xs text-gray-400">PCB Design & Embedded Systems</p>
-                            </div>
-                          </div>
-                          <div className="text-sm text-gray-300 space-y-2">
-                            <p className="flex items-center gap-2">
-                              <Code2 size={14} className="text-[#ff0080]" />
-                              Hardware Projects & Firmware
-                            </p>
-                            <p className="flex items-center gap-2">
-                              <Star size={14} className="text-[#ff0080]" />
-                              KiCad Designs & Schematics
-                            </p>
-                            <p className="flex items-center gap-2">
-                              <GitFork size={14} className="text-[#ff0080]" />
-                              Open Source Contributions
-                            </p>
-                          </div>
-                          <div className="pt-2 border-t border-[#ff0080]/20">
-                            <p className="text-xs text-gray-400 flex items-center gap-1">
-                              <ExternalLink size={12} />
-                              Click to visit GitHub profile
-                            </p>
-                          </div>
-                        </div>
-                      </HoverCardContent>
-                    </HoverCard>
-                  </div>
-                </CardContent>
-              </Card>
+              <ContactInfo />
+              <SocialLinks />
             </motion.div>
           </div>
         </div>
