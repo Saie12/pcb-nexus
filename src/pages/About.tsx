@@ -62,33 +62,17 @@ export default function About() {
         });
       }
 
-      // Fetch the PDF as a blob to ensure proper download
-      const response = await fetch("/assets/Saiesh_Sasane_Embedded_Hardware_Engineer_Resume.pdf");
-      if (!response.ok) {
-        throw new Error("Failed to fetch resume");
-      }
-      
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      
-      // Create and trigger download with proper timing
+      // Direct download approach - more reliable across browsers
       const link = document.createElement("a");
-      link.href = url;
+      link.href = "/assets/Saiesh_Sasane_Embedded_Hardware_Engineer_Resume.pdf";
       link.download = "Saiesh_Sasane_Embedded_Hardware_Engineer_Resume.pdf";
-      link.style.display = "none";
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
       
+      // Append to body, click, and remove
       document.body.appendChild(link);
-      
-      // Use setTimeout to ensure the link is in DOM before clicking
-      setTimeout(() => {
-        link.click();
-        
-        // Cleanup after a delay to ensure download starts
-        setTimeout(() => {
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(url);
-        }, 100);
-      }, 0);
+      link.click();
+      document.body.removeChild(link);
 
       toast.success("Resume download started!");
     } catch (error) {
