@@ -71,7 +71,10 @@ export default function About() {
         });
       }
 
-      toast.success("Resume opened in new tab. You can download it from there!");
+      // Show success message after a brief delay to confirm the tab opened
+      setTimeout(() => {
+        toast.success("Resume opened in new tab. You can download it from there!");
+      }, 100);
     } catch (error) {
       console.error("Error downloading resume:", error);
       toast.error("Failed to open resume. Please try again.");
