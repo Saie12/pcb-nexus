@@ -1,4 +1,5 @@
-import { Github, Mail, Copy, ExternalLink } from "lucide-react";
+import { Github, Mail, Copy, ExternalLink, Code2, Star, GitFork } from "lucide-react";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Link } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
@@ -143,14 +144,54 @@ export default function Footer() {
                 </AnimatePresence>
               </div>
 
-              <a
-                href="https://github.com/Saie12"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-[#111111] border border-[#ff0080]/20 rounded-lg flex items-center justify-center text-gray-400 hover:text-[#ff0080] hover:border-[#ff0080] hover:shadow-[0_0_15px_rgba(255,0,128,0.3)] transition-all"
-              >
-                <Github size={20} />
-              </a>
+              <HoverCard openDelay={200}>
+                <HoverCardTrigger asChild>
+                  <a
+                    href="https://github.com/Saie12"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-[#111111] border border-[#ff0080]/20 rounded-lg flex items-center justify-center text-gray-400 hover:text-[#ff0080] hover:border-[#ff0080] hover:shadow-[0_0_15px_rgba(255,0,128,0.3)] transition-all"
+                  >
+                    <Github size={20} />
+                  </a>
+                </HoverCardTrigger>
+                <HoverCardContent 
+                  className="w-80 bg-[#1a1a1a] border-[#ff0080]/30 cursor-pointer hover:bg-[#1a1a1a]/90 transition-colors"
+                  onClick={() => window.open("https://github.com/Saie12", "_blank")}
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-[#ff0080]/10 border border-[#ff0080]/20 rounded-lg flex items-center justify-center">
+                        <Github size={24} className="text-[#ff0080]" />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-semibold">@Saie12</h4>
+                        <p className="text-xs text-gray-400">PCB Design & Embedded Systems</p>
+                      </div>
+                    </div>
+                    <div className="text-sm text-gray-300 space-y-2">
+                      <p className="flex items-center gap-2">
+                        <Code2 size={14} className="text-[#ff0080]" />
+                        Hardware Projects & Firmware
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <Star size={14} className="text-[#ff0080]" />
+                        KiCad Designs & Schematics
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <GitFork size={14} className="text-[#ff0080]" />
+                        Open Source Contributions
+                      </p>
+                    </div>
+                    <div className="pt-2 border-t border-[#ff0080]/20">
+                      <p className="text-xs text-gray-400 flex items-center gap-1">
+                        <ExternalLink size={12} />
+                        Click to visit GitHub profile
+                      </p>
+                    </div>
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
             </div>
           </div>
         </div>

@@ -369,7 +369,10 @@ export default function Contact() {
                           <span className="text-sm">GitHub Profile</span>
                         </motion.a>
                       </HoverCardTrigger>
-                      <HoverCardContent className="w-80 bg-[#1a1a1a] border-[#ff0080]/30">
+                      <HoverCardContent 
+                        className="w-80 bg-[#1a1a1a] border-[#ff0080]/30 cursor-pointer hover:bg-[#1a1a1a]/90 transition-colors"
+                        onClick={() => window.open("https://github.com/Saie12", "_blank")}
+                      >
                         <div className="space-y-3">
                           <div className="flex items-center gap-3">
                             <div className="w-12 h-12 bg-[#ff0080]/10 border border-[#ff0080]/20 rounded-lg flex items-center justify-center">

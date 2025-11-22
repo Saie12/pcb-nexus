@@ -303,7 +303,10 @@ export default function About() {
                         </Button>
                       </motion.div>
                     </HoverCardTrigger>
-                    <HoverCardContent className="w-80 bg-[#1a1a1a] border-[#00BFFF]/30">
+                    <HoverCardContent 
+                      className="w-80 bg-[#1a1a1a] border-[#00BFFF]/30 cursor-pointer hover:bg-[#1a1a1a]/90 transition-colors"
+                      onClick={handleResumeDownload}
+                    >
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">
                           <div className="w-12 h-12 bg-[#00BFFF]/10 border border-[#00BFFF]/20 rounded-lg flex items-center justify-center">
