@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
-import { Download, Code, Cpu, Zap, GitBranch } from "lucide-react";
+import { Download, Code, Cpu, Zap, GitBranch, ExternalLink, FileText } from "lucide-react";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
@@ -286,19 +287,56 @@ export default function About() {
                     ))}
                   </div>
 
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Button
-                      onClick={handleResumeDownload}
-                      className="w-full mt-8 bg-[#00BFFF] text-white hover:bg-[#00BFFF]/90 shadow-[0_0_20px_rgba(0,191,255,0.3)] hover:shadow-[0_0_30px_rgba(0,191,255,0.5)] font-semibold transition-all duration-300"
-                      size="lg"
-                    >
-                      <Download className="mr-2" size={20} />
-                      Download My Resume
-                    </Button>
-                  </motion.div>
+                  <HoverCard openDelay={200}>
+                    <HoverCardTrigger asChild>
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <Button
+                          onClick={handleResumeDownload}
+                          className="w-full mt-8 bg-[#00BFFF] text-white hover:bg-[#00BFFF]/90 shadow-[0_0_20px_rgba(0,191,255,0.3)] hover:shadow-[0_0_30px_rgba(0,191,255,0.5)] font-semibold transition-all duration-300"
+                          size="lg"
+                        >
+                          <Download className="mr-2" size={20} />
+                          Download My Resume
+                        </Button>
+                      </motion.div>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="w-80 bg-[#1a1a1a] border-[#00BFFF]/30">
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-[#00BFFF]/10 border border-[#00BFFF]/20 rounded-lg flex items-center justify-center">
+                            <FileText size={24} className="text-[#00BFFF]" />
+                          </div>
+                          <div>
+                            <h4 className="text-white font-semibold">Resume Preview</h4>
+                            <p className="text-xs text-gray-400">PDF Document • 50KB</p>
+                          </div>
+                        </div>
+                        <div className="text-sm text-gray-300 space-y-1">
+                          <p className="flex items-center gap-2">
+                            <span className="text-[#00ff88]">✓</span> Professional Experience
+                          </p>
+                          <p className="flex items-center gap-2">
+                            <span className="text-[#00ff88]">✓</span> Technical Skills
+                          </p>
+                          <p className="flex items-center gap-2">
+                            <span className="text-[#00ff88]">✓</span> Project Portfolio
+                          </p>
+                          <p className="flex items-center gap-2">
+                            <span className="text-[#00ff88]">✓</span> Education & Certifications
+                          </p>
+                        </div>
+                        <div className="pt-2 border-t border-[#00BFFF]/20">
+                          <p className="text-xs text-gray-400 flex items-center gap-1">
+                            <ExternalLink size={12} />
+                            Click to open in new tab
+                          </p>
+                        </div>
+                      </div>
+                    </HoverCardContent>
+                  </HoverCard>
                 </CardContent>
               </Card>
             </motion.div>
