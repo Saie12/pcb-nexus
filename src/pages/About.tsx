@@ -71,17 +71,24 @@ export default function About() {
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       
-      // Trigger download with blob URL
+      // Create and trigger download with proper timing
       const link = document.createElement("a");
       link.href = url;
       link.download = "Saiesh_Sasane_Embedded_Hardware_Engineer_Resume.pdf";
-      link.setAttribute("type", "application/pdf");
-      document.body.appendChild(link);
-      link.click();
+      link.style.display = "none";
       
-      // Cleanup
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
+      document.body.appendChild(link);
+      
+      // Use setTimeout to ensure the link is in DOM before clicking
+      setTimeout(() => {
+        link.click();
+        
+        // Cleanup after a delay to ensure download starts
+        setTimeout(() => {
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+        }, 100);
+      }, 0);
 
       toast.success("Resume download started!");
     } catch (error) {
