@@ -47,7 +47,16 @@ export default function About() {
 
   const handleResumeDownload = async () => {
     try {
-      // Log download to Convex
+      // Open the PDF in a new tab FIRST (before async operations) to avoid popup blockers
+      const newWindow = window.open("/assets/Saiesh_Sasane_Embedded_Hardware_Engineer_Resume.pdf", "_blank");
+      
+      // Check if popup was blocked
+      if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+        toast.error("Popup blocked! Please allow popups for this site and try again.");
+        return;
+      }
+
+      // Log download to Convex (after opening to avoid blocking)
       await logDownload({
         source: "portfolio",
         userAgent: navigator.userAgent,
@@ -62,13 +71,10 @@ export default function About() {
         });
       }
 
-      // Open resume in new tab - browser will handle download from there
-      window.open("/assets/Saiesh_Sasane_Embedded_Hardware_Engineer_Resume.pdf", "_blank");
-
       toast.success("Resume opened in new tab. You can download it from there!");
     } catch (error) {
       console.error("Error downloading resume:", error);
-      toast.error("Failed to download resume. Please try again.");
+      toast.error("Failed to open resume. Please try again.");
     }
   };
 
