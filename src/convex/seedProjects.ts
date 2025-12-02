@@ -23,7 +23,7 @@ export const seed = mutation({
         challenges: "The primary challenge was ensuring RF performance and signal integrity for both the GPS and GSM subsystems. The GPS_ANT and GSM_ANT traces must be routed as 50-ohm controlled impedance transmission lines to maximize signal power transfer from the antennas to the sensitive receivers. Component placement was critical - the GPS and GSM modules needed to be as close as possible to their respective antenna connectors to minimize transmission line losses. Another key challenge was managing the mixed-signal environment with sensitive RF sections alongside switching power regulation circuitry. The recommendation for future revisions is to implement a Signal-Ground-Power-Signal stackup with a dedicated solid ground plane to significantly improve RF reliability and EMI/EMC performance.",
         schematicImage: "https://harmless-tapir-303.convex.cloud/api/storage/b21b1d4a-19d4-418e-9ca5-5dbba6a8ce31",
         pcbLayoutImages: [
-          "https://harmless-tapir-303.convex.cloud/api/storage/46121b6c-a850-4ce2-a8c4-3cfcfc51db6c",
+          "https://harmless-tapir-303.convex.cloud/api/storage/4bb558a7-cdee-479b-88b5-c58147caf88b",
           "https://harmless-tapir-303.convex.cloud/api/storage/0725169e-10e0-4c43-9adf-57b3e53bbbbf",
           "https://harmless-tapir-303.convex.cloud/api/storage/54407332-879e-4980-b3b2-3242784de436",
           "https://harmless-tapir-303.convex.cloud/api/storage/6a1c0853-cf21-40c5-b1ec-db13b34cc2cb"
