@@ -48,7 +48,7 @@ export const seed = mutation({
         challenges: "The primary challenge was ensuring electrical safety when handling mains voltage on a PCB. The design required careful attention to creepage distances, isolation slots, and physical separation between high-voltage AC traces and low-voltage DC logic. Component placement was critical to maintain proper isolation while keeping the board compact. Another challenge was implementing reliable relay driver circuitry with proper flyback protection to prevent voltage spikes from damaging the ESP32. The inclusion of BOOT and EN buttons alongside the UART header allows for one-click flashing using standard USB-to-serial adapters, making the development cycle fast and efficient. On-board LEDs provide immediate visual feedback on the status of each relay.",
         schematicImage: "https://harmless-tapir-303.convex.cloud/api/storage/96ece00b-b3c5-4f2e-a888-f52b1b625b72",
         pcbLayoutImages: [
-          "https://harmless-tapir-303.convex.cloud/api/storage/a6b41efb-b5f4-4738-8f08-f0605eeb678c",
+          "https://harmless-tapir-303.convex.cloud/api/storage/8ccecfd0-570f-4f48-ae94-8ebafc31cee0",
           "https://harmless-tapir-303.convex.cloud/api/storage/e6ec72c3-ef7d-439a-bc67-12571ba06ad7"
         ],
         view3dImages: [
