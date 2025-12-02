@@ -53,7 +53,7 @@ export const seed = mutation({
         ],
         view3dImages: [
           "https://harmless-tapir-303.convex.cloud/api/storage/73b3ab34-7f35-4491-a9e4-1a8eb99c5a44",
-          "https://harmless-tapir-303.convex.cloud/api/storage/dc5d2379-ab89-429c-8c8d-ad79f0989957"
+          "https://harmless-tapir-303.convex.cloud/api/storage/1c3c2e0b-ba8e-4eeb-8c2e-f6ad906016cb"
         ],
         layoutImages: [],
         githubUrl: "https://github.com/Saie12/KiCAD-Home-Automation-with-ESP32-Project",
