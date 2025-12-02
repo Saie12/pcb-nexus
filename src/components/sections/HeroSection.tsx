@@ -62,7 +62,7 @@ export default function HeroSection() {
             </motion.div>
             <VariableProximity 
               text="Electronics engineer specializing in high-speed board design, embedded firmware, and rapid prototyping using KiCad, C++, and Python."
-              className="text-base sm:text-xl text-muted-foreground max-w-3xl leading-relaxed"
+              className="text-base sm:text-xl text-muted-foreground max-w-3xl leading-relaxed hyphens-none break-words"
             />
           </div>
 
