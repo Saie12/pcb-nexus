@@ -25,7 +25,7 @@ export const seed = mutation({
         pcbLayoutImages: [
           "https://harmless-tapir-303.convex.cloud/api/storage/4bb558a7-cdee-479b-88b5-c58147caf88b",
           "https://harmless-tapir-303.convex.cloud/api/storage/edd17d7d-461e-40b6-9884-03da7144bb28",
-          "https://harmless-tapir-303.convex.cloud/api/storage/54407332-879e-4980-b3b2-3242784de436",
+          "https://harmless-tapir-303.convex.cloud/api/storage/e644c807-f1e8-4cac-9cb6-e7e415e3d99b",
           "https://harmless-tapir-303.convex.cloud/api/storage/6a1c0853-cf21-40c5-b1ec-db13b34cc2cb"
         ],
         view3dImages: [
