@@ -52,7 +52,7 @@ export const seed = mutation({
           "https://harmless-tapir-303.convex.cloud/api/storage/9f7e3233-81b1-476f-8911-1bd2e37f1474"
         ],
         view3dImages: [
-          "https://harmless-tapir-303.convex.cloud/api/storage/be36e437-1a05-4427-a718-75b893ec6172",
+          "https://harmless-tapir-303.convex.cloud/api/storage/73b3ab34-7f35-4491-a9e4-1a8eb99c5a44",
           "https://harmless-tapir-303.convex.cloud/api/storage/dc5d2379-ab89-429c-8c8d-ad79f0989957"
         ],
         layoutImages: [],
